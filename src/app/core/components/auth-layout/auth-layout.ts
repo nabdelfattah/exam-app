@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthTexTBox } from '@app/features/auth';
+import { AuthTextBox } from '@app/features/auth';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [AuthTexTBox, RouterOutlet],
+  imports: [AuthTextBox, RouterOutlet],
   templateUrl: './auth-layout.html',
 })
 export class AuthLayout {}
