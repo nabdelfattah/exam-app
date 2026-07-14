@@ -1,9 +1,11 @@
 import { Component, input } from '@angular/core';
+import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-field',
-  imports: [],
+  imports: [ReactiveFormsModule, InputTextModule],
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }],
   templateUrl: './field.html',
 })
 export class Field {

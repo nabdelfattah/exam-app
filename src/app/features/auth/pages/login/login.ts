@@ -11,11 +11,13 @@ import { validate } from '@angular/forms/signals';
 export class Login {
   private readonly fb = inject(FormBuilder);
   loginForm = this.fb.group({
-    username: ['', Validators.required, Validators.minLength(3)],
+    username: ['', [Validators.required, Validators.minLength(3)]],
     password: [
       '',
-      Validators.required,
-      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
+      [
+        Validators.required,
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
+      ],
     ],
   });
 }

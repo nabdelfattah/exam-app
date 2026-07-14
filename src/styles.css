@@ -8,8 +8,14 @@
   --font-inter: 'Inter', sans-seri;
   --color-primary: #155dfc;
   --color-black: #374151;
+  --color-gray-light: #9ca3af;
 }
 
 @utility h1 {
   @apply font-bold text-3xl font-inter;
+}
+
+body {
+  color: #1f2937;
+  font-family: 'Inter', sans-seri;
 }

@@ -2,8 +2,9 @@
   <label [for]="label()" class="font-geist text-base font-medium">{{ label() }}</label>
   <input
     pInputText
-    [formControlName]="controlName"
+    [formControlName]="controlName()"
     [id]="label()"
+    [type]="type()"
     [placeholder]="placeholder()"
     class="placeholder:text-gray-light placeholder:text-sm placeholder:font-geist py-3.5 px-2.5"
   />
