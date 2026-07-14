@@ -6,4 +6,5 @@
 @theme {
   --font-geist: 'Geist Mono', monospace;
   --font-inter: 'Inter', sans-seri;
+  --color-primary: #155dfc;
 }
