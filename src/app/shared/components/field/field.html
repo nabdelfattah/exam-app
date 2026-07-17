@@ -7,8 +7,9 @@
     [type]="type()"
     [placeholder]="placeholder()"
     class="border border-gray-200 rounded-none placeholder:text-gray-400 placeholder:text-sm placeholder:font-geist py-3.5 px-2.5"
+    [class]="{ 'border-red-600': showError }"
   />
-  @if (control?.invalid && !!control?.touched) {
+  @if (showError) {
     @for (key of errorKeys; track key) {
       <app-input-message>{{ errorMessages()[key] }}</app-input-message>
     }

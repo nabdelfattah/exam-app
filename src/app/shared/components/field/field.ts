@@ -21,6 +21,10 @@ export class Field {
     return this.controlContainer.control?.get(this.controlName());
   }
 
+  get showError(): boolean {
+    return !!this.control?.invalid && !!this.control?.touched;
+  }
+
   get errorKeys(): string[] {
     return this.control?.errors ? Object.keys(this.control.errors) : [];
   }
