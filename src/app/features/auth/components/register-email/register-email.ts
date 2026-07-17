@@ -1,6 +1,7 @@
 import { Component, inject, output, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Button, Field, Toast, Link } from '@shared/components';
+import { AuthFlowService } from '../../services/auth-flow-service';
 
 @Component({
   selector: 'app-register-email',
@@ -9,6 +10,7 @@ import { Button, Field, Toast, Link } from '@shared/components';
 })
 export class RegisterEmail {
   private readonly fb = inject(FormBuilder);
+  private readonly authFlowService = inject(AuthFlowService);
 
   next = output<void>();
 
@@ -19,6 +21,8 @@ export class RegisterEmail {
 
   submitHandler() {
     if (this.registerForm.valid) {
+      // store the email in the authServide and send it to the register-otp page
+      this.authFlowService.setEmail(this.registerForm.get('email')?.getRawValue());
       // move to the next step
       this.next.emit();
     } else {

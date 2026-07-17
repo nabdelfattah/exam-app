@@ -1,1 +1,44 @@
-<p>register-otp works!</p>
+<div>
+  <h1 class="h1 mb-1.5">Create Account</h1>
+  <p class="font-inter font-bold text-2xl text-primary my-2.5">Verify OTP</p>
+  <p class="description">
+    Please enter the 6-digits code we have sent to: <span class="text-primary">{{ email() }}</span
+    >.
+    <app-button label="Edit" variant="link" type="button" (click)="editHandler()"></app-button>
+  </p>
+  <form [formGroup]="otpForm" (ngSubmit)="submitHandler()">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col items-center">
+        <p-inputOtp
+          formControlName="otp"
+          name="otp"
+          [length]="6"
+          styleClass="w-10 h-10 rounded-none mt-6.5 mb-2 mx-2 border border-gray-200"
+        />
+
+        @if (this.otpForm.get('otp')?.invalid && this.otpForm.get('otp')?.touched) {
+          @if (this.otpForm.get('otp')?.hasError('pattern')) {
+            <app-input-message>Invalid OTP</app-input-message>
+          }
+          @if (this.otpForm.get('otp')?.hasError('required')) {
+            <app-input-message>OTP is required</app-input-message>
+          }
+        }
+      </div>
+    </div>
+
+    <p class="description mt-6 text-center">You can request another code in: 60s</p>
+
+    <!-- toast -->
+    @if (displayToast()) {
+      <app-toast (toastEvent)="displayToast.set($event)" />
+    }
+
+    <!-- next button -->
+    <div class="mt-10">
+      <app-button label="Verify Code" type="submit" variant="outline"
+        ><img src="/assets/icons/chevron-right-dark.svg" alt="arrow icon" class="order-last w-4"
+      /></app-button>
+    </div>
+  </form>
+</div>

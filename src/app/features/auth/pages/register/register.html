@@ -181,7 +181,7 @@
       <!-- step 2: OTP -->
       <p-step-panel [value]="2">
         <ng-template #content let-activateCallback="activateCallback">
-          <app-register-otp />
+          <app-register-otp (previous)="currentStep.set(1)" (next)="currentStep.set(3)" />
         </ng-template>
       </p-step-panel>
 
