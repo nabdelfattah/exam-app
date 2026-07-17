@@ -18,7 +18,8 @@
   --font-geist: 'Geist Mono', monospace;
   --font-inter: 'Inter', sans-seri;
   --color-primary: #155dfc;
-  --color-black: #374151;
+  --color-black: #1f2937;
+  --color-gray-700: #374151;
   --color-gray-500: #6b7280;
   --color-gray-400: #9ca3af;
   --color-gray-200: #e5e7eb;
@@ -34,6 +35,6 @@
 }
 
 body {
-  color: #1f2937;
+  color: var(--color-black);
   font-family: 'Inter', sans-seri;
 }
