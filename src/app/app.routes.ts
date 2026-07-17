@@ -14,7 +14,6 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: Login, title: 'Login' },
       { path: 'register', component: Register, title: 'Register' },
-      { path: 'otp', component: Login, title: 'Verify OTP' },
       { path: 'forget-password', component: ForgetPassword, title: 'Forget Password' },
       { path: 'check-email', component: CheckEmail, title: 'Check Email' },
       { path: 'reset-password', component: ResetPassword, title: 'Reset Password' },
