@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMessage } from '../input-message/input-message';
@@ -15,6 +15,18 @@ export class Field {
   placeholder = input<string>('');
   controlName = input<string>('');
   errorMessages = input<Record<string, string>>({});
+
+  // in case of password input
+  showPassword = signal(false);
+  inputType = computed(() => {
+    if (this.type() != 'password') return this.type();
+    return this.showPassword() ? 'text' : 'password';
+  });
+  eyeIcon = computed(() => (this.showPassword() ? 'eye' : 'eye-off'));
+  toggleEye() {
+    this.showPassword.update((prev) => !prev);
+  }
+
   private readonly controlContainer = inject(ControlContainer);
 
   get control() {

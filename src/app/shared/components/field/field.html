@@ -1,14 +1,25 @@
 <div class="flex flex-col">
   <label [for]="label()" class="font-geist text-base font-medium">{{ label() }}</label>
-  <input
-    pInputText
-    [formControlName]="controlName()"
-    [id]="label()"
-    [type]="type()"
-    [placeholder]="placeholder()"
-    class="border border-gray-200 rounded-none placeholder:text-gray-400 placeholder:text-sm placeholder:font-geist py-3.5 px-2.5"
-    [class]="{ 'border-red-600': showError }"
-  />
+  <div class="relative">
+    <input
+      pInputText
+      [formControlName]="controlName()"
+      [id]="label()"
+      [type]="inputType()"
+      [placeholder]="placeholder()"
+      class="w-full border border-gray-200 rounded-none placeholder:text-gray-400 placeholder:text-sm placeholder:font-geist py-3.5 px-2.5"
+      [class]="{ 'border-red-600': showError }"
+    />
+    @if (type() == 'password') {
+      <button type="button" class="cursor-pointer" (click)="toggleEye()">
+        <img
+          [src]="`/assets/icons/${eyeIcon()}.svg`"
+          alt="eye icon"
+          class="absolute top-1/2 right-4 -translate-y-1/2"
+        />
+      </button>
+    }
+  </div>
   @if (showError) {
     @for (key of errorKeys; track key) {
       <app-input-message>{{ errorMessages()[key] }}</app-input-message>
