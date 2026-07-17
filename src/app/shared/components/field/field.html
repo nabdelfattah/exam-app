@@ -6,6 +6,11 @@
     [id]="label()"
     [type]="type()"
     [placeholder]="placeholder()"
-    class="placeholder:text-gray-light placeholder:text-sm placeholder:font-geist py-3.5 px-2.5"
+    class="border border-gray-200 rounded-none placeholder:text-gray-400 placeholder:text-sm placeholder:font-geist py-3.5 px-2.5"
   />
+  @if (control?.invalid && !!control?.touched) {
+    @for (key of errorKeys; track key) {
+      <app-input-message>{{ errorMessages()[key] }}</app-input-message>
+    }
+  }
 </div>

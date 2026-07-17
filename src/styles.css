@@ -1,18 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import 'tailwindcss';
+
+@layer tailwind-base, primeng, tailwind-utilities;
+
+@layer tailwind-base {
+  @import 'tailwindcss/preflight.css';
+}
+
+@import 'tailwindcss/theme.css';
+
+@layer tailwind-utilities {
+  @import 'tailwindcss/utilities.css';
+}
 
 @theme {
   --font-geist: 'Geist Mono', monospace;
   --font-inter: 'Inter', sans-seri;
   --color-primary: #155dfc;
   --color-black: #374151;
-  --color-gray-light: #9ca3af;
+  --color-gray-400: #9ca3af;
+  --color-gray-200: #e5e7eb;
+  --color-red-50: #fef2f2;
+  --color-red-600: #dc2626;
 }
 
 @utility h1 {
-  @apply font-bold text-3xl font-inter;
+  @apply font-bold text-2xl lg:text-3xl font-inter;
 }
 
 body {
