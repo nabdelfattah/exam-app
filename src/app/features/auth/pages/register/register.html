@@ -174,7 +174,7 @@
       <!-- step 1: Email -->
       <p-step-panel [value]="1">
         <ng-template #content let-activateCallback="activateCallback">
-          <app-register-email />
+          <app-register-email (next)="currentStep.set(2)" />
         </ng-template>
       </p-step-panel>
 

@@ -1,1 +1,35 @@
-<p>register-email works!</p>
+<div>
+  <h1 class="h1 mb-1.5">Create Account</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitHandler()">
+    <div class="flex flex-col gap-4">
+      <app-field
+        controlName="email"
+        label="Email"
+        placeholder="user@example.com"
+        type="email"
+        [errorMessages]="{
+          required: 'Your Email is required',
+          email: 'Please, enter a valid email',
+        }"
+      />
+    </div>
+
+    <!-- toast -->
+    @if (displayToast()) {
+      <app-toast (toastEvent)="displayToast.set($event)" />
+    }
+
+    <!-- next button -->
+    <div class="mt-10">
+      <app-button label="Next" type="submit" variant="outline"
+        ><img src="/assets/icons/chevron-right-dark.svg" alt="arrow icon" class="order-last w-4"
+      /></app-button>
+    </div>
+    <div class="mt-9 text-center">
+      <p class="font-geist font-medium text-sm">
+        Already have an account? <app-link link="/login">Login</app-link>
+      </p>
+    </div>
+  </form>
+</div>

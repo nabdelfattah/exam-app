@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { computeMsgId } from '@angular/compiler';
+import { Component, computed, input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -9,4 +10,17 @@ import { ButtonModule } from 'primeng/button';
 export class Button {
   label = input<string>('');
   type = input<'submit' | 'button'>('button');
+  variant = input<'primary' | 'secondary' | 'outline'>('primary');
+
+  buttonClass = computed(() => {
+    const base =
+      'w-full rounded-none py-3.5 flex items-center justify-center gap-2 transition duration-300';
+    if (this.variant() == 'primary') {
+      return `${base} bg-primary text-white hover:bg-primary-dark`;
+    } else if (this.variant() == 'outline') {
+      return `${base} bg-blue-50 border border-primary text-black hover:bg-blue-100`;
+    } else {
+      return;
+    }
+  });
 }
