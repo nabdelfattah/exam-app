@@ -25,12 +25,9 @@ export class Login {
   });
 
   submitHandler() {
-    console.log(this.loginForm);
     if (this.loginForm.valid) {
-      console.log('valid form');
       // send request to backend
     } else {
-      console.log('invalid form');
       // show all problematic fields
       this.loginForm.markAllAsTouched();
       // display toast
