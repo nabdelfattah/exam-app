@@ -6,7 +6,7 @@ import { validate } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [ButtonModule, Field, Button, Link, Toast, ReactiveFormsModule, RouterLink],
+  imports: [Field, Button, Link, Toast, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ForgetPassword, Login, Register, ResetPassword } from '@app/features/auth';
+import { ForgetPassword, Login, Register, ResetPassword, CheckEmail } from '@app/features/auth';
 import { AuthLayout, Notfound } from '@core/components';
 
 export const routes: Routes = [
@@ -16,6 +16,7 @@ export const routes: Routes = [
       { path: 'register', component: Register, title: 'Register' },
       { path: 'otp', component: Login, title: 'Verify OTP' },
       { path: 'forget-password', component: ForgetPassword, title: 'Forget Password' },
+      { path: 'check-email', component: CheckEmail, title: 'Check Email' },
       { path: 'reset-password', component: ResetPassword, title: 'Reset Password' },
     ],
   },

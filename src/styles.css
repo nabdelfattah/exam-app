@@ -19,6 +19,7 @@
   --font-inter: 'Inter', sans-seri;
   --color-primary: #155dfc;
   --color-black: #374151;
+  --color-gray-500: #6b7280;
   --color-gray-400: #9ca3af;
   --color-gray-200: #e5e7eb;
   --color-red-50: #fef2f2;
@@ -27,6 +28,9 @@
 
 @utility h1 {
   @apply font-bold text-2xl lg:text-3xl font-inter;
+}
+@utility description {
+  @apply text-gray-500 text-base font-geist;
 }
 
 body {
