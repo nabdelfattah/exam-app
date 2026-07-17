@@ -1,10 +1,10 @@
 import { Component, inject, output, signal } from '@angular/core';
-import { Button, Toast, Field } from '@/app/shared/components';
+import { Button, Toast, Field, InputMessage } from '@/app/shared/components';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import IntlTelInputWithUtils from '@intl-tel-input/angular/with-utils';
 @Component({
   selector: 'app-register-info',
-  imports: [Button, Toast, Field, ReactiveFormsModule],
+  imports: [Button, Toast, Field, ReactiveFormsModule, IntlTelInputWithUtils, InputMessage],
   templateUrl: './register-info.html',
 })
 export class RegisterInfo {
@@ -17,7 +17,7 @@ export class RegisterInfo {
     fName: ['', [Validators.required]],
     lName: ['', [Validators.required]],
     username: ['', [Validators.required, Validators.minLength(3)]],
-    phone: ['', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]],
+    phone: ['', [Validators.required]],
   });
 
   submitHandler() {
@@ -31,4 +31,5 @@ export class RegisterInfo {
       this.displayToast.set(true);
     }
   }
+  onPhoneChange(_value: string): void {}
 }

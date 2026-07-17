@@ -34,16 +34,20 @@
           minlength: 'Minimum length is 3 characters',
         }"
       />
-      <app-field
-        controlName="phone"
-        label="Phone"
-        placeholder="1012345678"
-        type="phone"
-        [errorMessages]="{
-          required: 'Phone is required',
-          pattern: 'Please, enter a valid phone number',
-        }"
-      />
+      <div class="flex flex-col">
+        <label class="font-geist text-base font-medium">Phone</label>
+        <intl-tel-input
+          formControlName="phone"
+          initialCountry="eg"
+          [separateDialCode]="true"
+          containerClass="border border-gray-200 rounded-none w-full"
+          [inputAttributes]="{ class: 'py-3.5 px-2.5 w-full' }"
+          (numberChange)="onPhoneChange($event)"
+        />
+        @if (infoForm.get('phone')?.invalid && infoForm.get('phone')?.touched) {
+          <app-input-message>Please enter a valid phone number</app-input-message>
+        }
+      </div>
     </div>
 
     <!-- toast -->

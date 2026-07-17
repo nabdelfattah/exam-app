@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-@layer tailwind-base, primeng, tailwind-utilities;
+@layer tailwind-base, primeng, intl-tel-input, tailwind-utilities;
 
 @layer tailwind-base {
   @import 'tailwindcss/preflight.css';
@@ -30,6 +30,14 @@
   --color-red-600: #dc2626;
 }
 
+/* intl-tel-input */
+@layer intl-tel-input {
+  @import 'intl-tel-input/dist/css/intlTelInput.css';
+}
+:root {
+  --iti-path-flags-1x: url('/assets/intl-tel-input/flags.webp');
+  --iti-path-flags-2x: url('/assets/intl-tel-input/flags@2x.webp');
+}
 @utility h1 {
   @apply font-bold text-2xl lg:text-3xl font-inter;
 }
