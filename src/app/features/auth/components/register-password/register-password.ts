@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Button, Field, Link, Toast } from '@/app/shared/components';
+import { Button, Field, Toast } from '@/app/shared/components';
 @Component({
   selector: 'app-register-password',
-  imports: [Field, Button, Link, Toast, ReactiveFormsModule],
+  imports: [Field, Button, Toast, ReactiveFormsModule],
   templateUrl: './register-password.html',
 })
 export class RegisterPassword {

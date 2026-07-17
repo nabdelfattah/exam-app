@@ -188,7 +188,7 @@
       <!-- step 3: personal info -->
       <p-step-panel [value]="3">
         <ng-template #content let-activateCallback="activateCallback">
-          <app-register-info />
+          <app-register-info (next)="currentStep.set(4)" />
         </ng-template>
       </p-step-panel>
 
