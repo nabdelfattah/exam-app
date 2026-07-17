@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Link } from '@/app/shared/components';
 import { Location } from '@angular/common';
-import { ButtonDirective } from 'primeng/button';
 import { AuthFlowService } from '../../services/auth-flow-service';
 
 @Component({
   selector: 'app-check-email',
-  imports: [Link, ButtonDirective],
+  imports: [Link],
   templateUrl: './check-email.html',
 })
 export class CheckEmail {

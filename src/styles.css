@@ -18,6 +18,7 @@
   --font-geist: 'Geist Mono', monospace;
   --font-inter: 'Inter', sans-seri;
   --color-primary: #155dfc;
+  --color-blue-100: #dbeafe;
   --color-black: #1f2937;
   --color-gray-700: #374151;
   --color-gray-500: #6b7280;
@@ -37,4 +38,12 @@
 body {
   color: var(--color-black);
   font-family: 'Inter', sans-seri;
+}
+
+.register-stepper .step-diamond-btn + .p-stepper-separator {
+  @apply flex-1 h-0 border-t-2 border-dashed border-primary bg-transparent;
+}
+
+.register-stepper .step-diamond-btn.passed + .p-stepper-separator {
+  @apply border-solid;
 }

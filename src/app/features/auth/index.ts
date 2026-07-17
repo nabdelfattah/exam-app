@@ -3,8 +3,5 @@ export * from './pages/login/login';
 export * from './pages/register/register';
 export * from './pages/reset-password/reset-password';
 export * from './pages/check-email/check-email';
+
 export * from './components/auth-text-box/auth-text-box';
-export * from './components/register-email/register-email';
-export * from './components/register-otp/register-otp';
-export * from './components/register-info/register-info';
-export * from './components/register-password/register-password';

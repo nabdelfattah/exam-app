@@ -1,12 +1,9 @@
-import { Component, ElementRef, inject, signal, ViewChild, viewChild } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { Component, inject, signal, ViewChild, viewChild } from '@angular/core';
 import { Field, Button, Link, Toast } from '@shared/components';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { validate } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [Field, Button, Link, Toast, ReactiveFormsModule, RouterLink],
+  imports: [Field, Button, Link, Toast, ReactiveFormsModule],
   templateUrl: './login.html',
 })
 export class Login {

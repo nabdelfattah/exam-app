@@ -1,12 +1,12 @@
 import { Link, Field, Button, Toast } from '@/app/shared/components';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthFlowService } from '../../services/auth-flow-service';
 
 @Component({
   selector: 'app-forget-password',
-  imports: [Field, Button, Link, Toast, ReactiveFormsModule, RouterLink],
+  imports: [Field, Button, Link, Toast, ReactiveFormsModule],
   templateUrl: './forget-password.html',
 })
 export class ForgetPassword {
