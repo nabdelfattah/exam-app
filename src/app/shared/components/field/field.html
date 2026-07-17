@@ -21,7 +21,7 @@
     }
   </div>
   @if (showError) {
-    @for (key of errorKeys; track key) {
+    @for (key of errorKeys(); track key) {
       <app-input-message>{{ errorMessages()[key] }}</app-input-message>
     }
   }

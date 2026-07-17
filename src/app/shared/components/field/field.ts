@@ -15,6 +15,11 @@ export class Field {
   placeholder = input<string>('');
   controlName = input<string>('');
   errorMessages = input<Record<string, string>>({});
+  errorKeys = computed(() => {
+    //signal instead of getter function to utilize signal caching istead of creating a new array each change detection
+    const errors = this.control?.errors;
+    return errors ? Object.keys(errors) : [];
+  });
 
   // in case of password input
   showPassword = signal(false);
@@ -35,9 +40,5 @@ export class Field {
 
   get showError(): boolean {
     return !!this.control?.invalid && !!this.control?.touched;
-  }
-
-  get errorKeys(): string[] {
-    return this.control?.errors ? Object.keys(this.control.errors) : [];
   }
 }
