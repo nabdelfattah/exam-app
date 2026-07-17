@@ -60,3 +60,6 @@ body {
 .register-stepper .step-diamond-btn.passed + .p-stepper-separator {
   @apply border-solid;
 }
+.phone-invalid .iti {
+  border-color: var(--color-red-600);
+}

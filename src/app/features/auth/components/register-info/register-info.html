@@ -34,7 +34,10 @@
           minlength: 'Minimum length is 3 characters',
         }"
       />
-      <div class="flex flex-col">
+      <div
+        class="flex flex-col"
+        [class.phone-invalid]="infoForm.get('phone')?.invalid && infoForm.get('phone')?.touched"
+      >
         <label class="font-geist text-base font-medium">Phone</label>
         <intl-tel-input
           formControlName="phone"
