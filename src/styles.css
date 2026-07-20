@@ -1,3 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@layer tailwind-base, primeng, intl-tel-input, tailwind-utilities;
+
+@layer tailwind-base {
+  @import 'tailwindcss/preflight.css';
+}
+
+@import 'tailwindcss/theme.css';
+
+@layer tailwind-utilities {
+  @import 'tailwindcss/utilities.css';
+}
+
+@theme {
+  --font-geist: 'Geist Mono', monospace;
+  --font-inter: 'Inter', sans-seri;
+  --color-primary: #155dfc;
+  --color-primary-dark: #1447e6;
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-black: #1f2937;
+  --color-gray-700: #374151;
+  --color-gray-500: #6b7280;
+  --color-gray-400: #9ca3af;
+  --color-gray-200: #e5e7eb;
+  --color-red-50: #fef2f2;
+  --color-red-600: #dc2626;
+}
+
+/* intl-tel-input */
+@layer intl-tel-input {
+  @import 'intl-tel-input/dist/css/intlTelInput.css';
+}
+:root {
+  --iti-path-flags-1x: url('/assets/intl-tel-input/flags.webp');
+  --iti-path-flags-2x: url('/assets/intl-tel-input/flags@2x.webp');
+}
+@utility h1 {
+  @apply font-bold text-2xl lg:text-3xl font-inter;
+}
+@utility blue-heading {
+  @apply font-inter font-bold text-2xl text-primary my-2.5;
+}
+@utility description {
+  @apply text-gray-500 text-base font-geist;
+}
+
+body {
+  color: var(--color-black);
+  font-family: 'Inter', sans-seri;
+}
+
+.register-stepper .step-diamond-btn + .p-stepper-separator {
+  @apply flex-1 h-0 border-t-2 border-dashed border-primary bg-transparent;
+}
+
+.register-stepper .step-diamond-btn.passed + .p-stepper-separator {
+  @apply border-solid;
+}
+.phone-invalid .iti {
+  border-color: var(--color-red-600);
+}
