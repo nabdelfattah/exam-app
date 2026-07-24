@@ -71,6 +71,32 @@
           "builder": "@angular/build:unit-test"
         }
       }
+    },
+    "ngx-iam-auth": {
+      "projectType": "library",
+      "root": "projects/ngx-iam-auth",
+      "sourceRoot": "projects/ngx-iam-auth/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-iam-auth/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-iam-auth/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-iam-auth/tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }

@@ -9,7 +9,8 @@
       "@app/*": ["src/app/*"],
       "@shared/*": ["src/app/shared/*"],
       "@core/*": ["src/app/core/*"],
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "ngx-iam-auth": ["./dist/ngx-iam-auth"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -36,6 +37,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-iam-auth/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-iam-auth/tsconfig.spec.json"
     }
   ]
 }
