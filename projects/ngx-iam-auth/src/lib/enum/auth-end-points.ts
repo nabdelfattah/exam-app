@@ -1,4 +1,4 @@
-const baseUrl = 'https://exam-app.elevate-bootcamp.cloud/';
+const baseUrl = 'https://exam-app.elevate-bootcamp.cloud/' as const;
 
 export default class AuthEndPoints {
   static readonly LOGIN = `${baseUrl}/api/auth/login`;

@@ -8,7 +8,11 @@
   "projects": {
     "exam-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": { "type": "component" },
+        "@schematics/angular:service": { "type": "service" },
+        "@schematics/angular:interface": { "type": "interface" }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -74,6 +78,11 @@
     },
     "ngx-iam-auth": {
       "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": { "type": "component" },
+        "@schematics/angular:service": { "type": "service" },
+        "@schematics/angular:interface": { "type": "interface" }
+      },
       "root": "projects/ngx-iam-auth",
       "sourceRoot": "projects/ngx-iam-auth/src",
       "prefix": "lib",
