@@ -1,14 +1,31 @@
 import { Routes } from '@angular/router';
-import { CheckEmail } from './pages/check-email/check-email';
-import { ForgetPassword } from './pages/forget-password/forget-password';
-import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
-import { ResetPassword } from './pages/reset-password/reset-password';
 
 export const authRoutes: Routes = [
-  { path: 'login', loadComponent: Login, title: 'Login' },
-  { path: 'register', loadComponent: Register, title: 'Register' },
-  { path: 'forget-password', loadComponent: ForgetPassword, title: 'Forget Password' },
-  { path: 'check-email', loadComponent: CheckEmail, title: 'Check Email' },
-  { path: 'reset-password', loadComponent: ResetPassword, title: 'Reset Password' },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login').then((c) => c.Login),
+    title: 'Login',
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register').then((c) => c.Register),
+    title: 'Register',
+  },
+  {
+    path: 'forget-password',
+    loadComponent: () =>
+      import('./pages/forget-password/forget-password').then((c) => c.ForgetPassword),
+    title: 'Forget Password',
+  },
+  {
+    path: 'check-email',
+    loadComponent: () => import('./pages/check-email/check-email').then((c) => c.CheckEmail),
+    title: 'Check Email',
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () =>
+      import('./pages/reset-password/reset-password').then((c) => c.ResetPassword),
+    title: 'Reset Password',
+  },
 ];
