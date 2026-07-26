@@ -1,23 +1,21 @@
 import { Routes } from '@angular/router';
-import { ForgetPassword, Login, Register, ResetPassword, CheckEmail } from '@app/features/auth';
 import { AuthLayout, Notfound } from '@core/components';
+import { MainLayoutComponent } from './core/components/main-layout/main-layout.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    component: MainLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent, title: 'dashboard' },
+    ],
   },
   {
     path: '',
     component: AuthLayout,
-    children: [
-      { path: 'login', component: Login, title: 'Login' },
-      { path: 'register', component: Register, title: 'Register' },
-      { path: 'forget-password', component: ForgetPassword, title: 'Forget Password' },
-      { path: 'check-email', component: CheckEmail, title: 'Check Email' },
-      { path: 'reset-password', component: ResetPassword, title: 'Reset Password' },
-    ],
+    loadChildren: () => import('./features/auth/auth.route').then((c) => c.authRoutes),
   },
   { path: '**', component: Notfound },
 ];
