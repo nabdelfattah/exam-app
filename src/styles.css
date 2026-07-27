@@ -28,6 +28,7 @@
   --color-gray-200: #e5e7eb;
   --color-red-50: #fef2f2;
   --color-red-600: #dc2626;
+  --color-green: #00bc7d;
 }
 
 /* intl-tel-input */
@@ -63,3 +64,36 @@ body {
 .phone-invalid .iti {
   border-color: var(--color-red-600);
 }
+
+/* restyle primeNG toast ***************************************** */
+.p-toast-message-text {
+  flex-direction: row;
+}
+.p-toast .p-toast-message {
+  background: var(--color-black); /* your dark surface token */
+  border-radius: 1px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+}
+
+.p-toast .p-toast-message-content {
+  padding: 0.875rem 1rem;
+  gap: 0.625rem;
+}
+
+.p-toast .p-toast-summary,
+.p-toast .p-toast-detail {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.875rem;
+  color: white;
+}
+
+/* icon color only — success */
+.p-toast .p-toast-message-success .p-toast-message-icon {
+  color: var(--color-green);
+}
+
+/* icon color only — error */
+.p-toast .p-toast-message-error .p-toast-message-icon {
+  color: var(--color-red-600);
+}
+/* **************************************************************** */

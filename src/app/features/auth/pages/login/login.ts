@@ -1,6 +1,8 @@
 import { Component, inject, signal, ViewChild, viewChild } from '@angular/core';
 import { Field, Button, Link, Toast } from '@shared/components';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from 'ngx-iam-auth';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   imports: [Field, Button, Link, Toast, ReactiveFormsModule],
@@ -8,9 +10,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class Login {
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly messageService = inject(MessageService);
 
   displayToast = signal(false);
-  loginForm = this.fb.group({
+  loginForm = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
     password: [
       '',
@@ -24,6 +28,15 @@ export class Login {
   submitHandler() {
     if (this.loginForm.valid) {
       // send request to backend
+      this.authService.login(this.loginForm.getRawValue()).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successs',
+            detail: 'You logged in successfully!',
+          });
+        },
+      });
     } else {
       // show all problematic fields
       this.loginForm.markAllAsTouched();
