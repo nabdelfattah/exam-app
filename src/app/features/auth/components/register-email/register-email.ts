@@ -14,7 +14,9 @@ export class RegisterEmail {
 
   next = output<void>();
 
+  errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
+
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
   });

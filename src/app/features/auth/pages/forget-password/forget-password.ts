@@ -14,7 +14,9 @@ export class ForgetPassword {
   private readonly authFlowService = inject(AuthFlowService); // to store email for the check-email page
   private readonly router = inject(Router);
 
+  errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
+
   forgetForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
   });

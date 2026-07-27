@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-toast',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './toast.html',
 })
 export class Toast {
+  message = input<string>();
   @Output() toastEvent: EventEmitter<boolean> = new EventEmitter();
 
   clickHandler() {

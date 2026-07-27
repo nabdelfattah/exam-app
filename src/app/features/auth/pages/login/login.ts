@@ -13,6 +13,8 @@ export class Login {
   private readonly authService = inject(AuthService);
   private readonly messageService = inject(MessageService);
 
+  errMsg = signal('Something Went Wrong!');
+
   displayToast = signal(false);
   loginForm = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
@@ -36,11 +38,16 @@ export class Login {
             detail: 'You logged in successfully!',
           });
         },
+        error: (err: any) => {
+          this.errMsg.set(err.error.message);
+          this.displayToast.set(true);
+        },
       });
     } else {
       // show all problematic fields
       this.loginForm.markAllAsTouched();
       // display toast
+      this.errMsg.set('Form Fields are not valid.');
       this.displayToast.set(true);
     }
   }

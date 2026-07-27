@@ -11,7 +11,9 @@ export class RegisterPassword {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
 
+  errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
+
   passwordForm = this.fb.group(
     {
       password: [

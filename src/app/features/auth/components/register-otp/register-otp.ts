@@ -17,7 +17,9 @@ export class RegisterOtp {
   next = output<void>();
   previous = output<void>();
 
+  errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
+
   otpForm = this.fb.group({
     otp: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
   });

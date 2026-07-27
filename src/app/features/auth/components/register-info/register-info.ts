@@ -12,7 +12,9 @@ export class RegisterInfo {
 
   next = output<void>();
 
+  errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
+
   infoForm = this.fb.group({
     fName: ['', [Validators.required]],
     lName: ['', [Validators.required]],
