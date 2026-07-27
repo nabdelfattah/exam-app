@@ -43,7 +43,7 @@ export class ResetPassword {
           confirmPassword: this.resetForm.get('rePassword')?.value || '',
         })
         .subscribe({
-          next: (res: any) => {
+          next: (res) => {
             this.messageService.add({
               severity: 'success',
               summary: 'Successs',
@@ -52,7 +52,7 @@ export class ResetPassword {
             // redirect to the login page
             this.router.navigate(['/login']);
           },
-          error: (err: any) => {
+          error: (err) => {
             this.errMsg.set(err.error.message);
             this.displayToast.set(true);
           },

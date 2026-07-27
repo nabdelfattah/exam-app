@@ -43,7 +43,7 @@ export class Login {
           // redirect to dashboard
           this.router.navigate(['/dashboard']);
         },
-        error: (err: any) => {
+        error: (err) => {
           this.errMsg.set(err.error.message);
           this.displayToast.set(true);
         },
