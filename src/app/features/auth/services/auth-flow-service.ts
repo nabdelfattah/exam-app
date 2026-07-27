@@ -8,7 +8,6 @@ export class AuthFlowService {
   email = this._email.asReadonly();
 
   setEmail(email: string) {
-    console.log(email);
     this._email.set(email);
   }
 }

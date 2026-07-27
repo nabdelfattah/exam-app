@@ -1,26 +1,24 @@
 import { Component, inject, output, signal } from '@angular/core';
 import { Button, Toast, Field, InputMessage } from '@/app/shared/components';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 import IntlTelInputWithUtils from '@intl-tel-input/angular/with-utils';
+import { RegisterFlowService } from '../../services/register-flow-service';
+import { AuthService } from 'ngx-iam-auth';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-register-info',
   imports: [Button, Toast, Field, ReactiveFormsModule, IntlTelInputWithUtils, InputMessage],
   templateUrl: './register-info.html',
 })
 export class RegisterInfo {
-  private readonly fb = inject(FormBuilder);
+  private readonly registerFlowService = inject(RegisterFlowService); // form
 
   next = output<void>();
 
   errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
 
-  infoForm = this.fb.group({
-    fName: ['', [Validators.required]],
-    lName: ['', [Validators.required]],
-    username: ['', [Validators.required, Validators.minLength(3)]],
-    phone: ['', [Validators.required]],
-  });
+  infoForm = this.registerFlowService.infoForm;
 
   submitHandler() {
     if (this.infoForm.valid) {
@@ -30,6 +28,7 @@ export class RegisterInfo {
       // show all problematic fields
       this.infoForm.markAllAsTouched();
       // display toast
+      this.errMsg.set('Form Fields are not valid.');
       this.displayToast.set(true);
     }
   }

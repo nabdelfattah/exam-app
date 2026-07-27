@@ -7,15 +7,16 @@ import { LoginRes } from '../interfaces/login.interface';
 })
 export class AuthAdaptorService implements Adaptor {
   adapt(data: any): LoginRes {
+    const { user, token } = data.payload;
     return {
-      username: data.user.username,
-      email: data.user.email,
-      phone: data.user.phone,
-      firstName: data.user.firstName,
-      lastName: data.user.lastName,
-      profilePhoto: data.user.profilePhoto,
-      role: data.user.role,
-      token: data.token,
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      profilePhoto: user.profilePhoto,
+      role: user.role,
+      token,
     };
   }
 }

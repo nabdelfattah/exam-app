@@ -43,8 +43,7 @@ export class ResetPassword {
           confirmPassword: this.resetForm.get('rePassword')?.value || '',
         })
         .subscribe({
-          next: (res) => {
-            console.log(res);
+          next: (res: any) => {
             this.messageService.add({
               severity: 'success',
               summary: 'Successs',
