@@ -118,3 +118,7 @@ body {
 .p-popover-content {
   padding: 0;
 }
+
+.p-breadcrumb-item-label {
+  @apply font-geist text-gray-400 hover:text-gray-500 transition-all duration-150;
+}
