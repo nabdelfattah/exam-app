@@ -1,9 +1,11 @@
-<div class="grid grid-cols-2">
-  <p-drawer #drawerRef [(visible)]="visible">
-    <ng-template #headless> <app-sidebar /></ng-template>
-  </p-drawer>
-  <p-button (click)="visible = true" icon="pi pi-bars" />
+<p-drawer #drawerRef [(visible)]="visible" class="absolute">
+  <ng-template #headless> <app-sidebar /></ng-template>
+</p-drawer>
+<p-button (click)="visible = true" icon="pi pi-bars" class="absolute lg:hidden" />
 
-  <app-sidebar />
-  <router-outlet />
+<div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] h-dvh">
+  <app-sidebar class="hidden lg:block" />
+  <main>
+    <router-outlet />
+  </main>
 </div>
