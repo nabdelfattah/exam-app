@@ -9,6 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
 import { errorInterceptor } from '@core/interceptors/error-interceptor';
 import { MyPreset } from './core/theme/my-preset';
+import { headerInterceptor } from './core/interceptors/header-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([errorInterceptor])),
+    provideHttpClient(withInterceptors([errorInterceptor, headerInterceptor])),
     MessageService,
     // provideAnimations(),
   ],
