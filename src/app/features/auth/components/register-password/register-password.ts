@@ -26,8 +26,20 @@ export class RegisterPassword {
       // send request to backend// send OTP to the backend (cofirm email)
       this.authService.register(this.registerFlowService.buildPayload()).subscribe({
         next: (res) => {
-          // store code
+          // store token and user data
           localStorage.setItem('examToken', res.token);
+          localStorage.setItem(
+            'examUser',
+            JSON.stringify({
+              username: res.username,
+              email: res.email,
+              phone: res.phone,
+              firstName: res.firstName,
+              lastName: res.lastName,
+              profilePhoto: res.profilePhoto,
+              role: res.role,
+            }),
+          );
           // show success toast
           this.messageService.add({
             severity: 'success',

@@ -38,8 +38,21 @@ export class Login {
             severity: 'success',
             detail: 'You logged in successfully!',
           });
-          // store token
+          // store token and user data
           localStorage.setItem('examToken', res.token);
+          localStorage.setItem(
+            'examUser',
+            JSON.stringify({
+              username: res.username,
+              email: res.email,
+              phone: res.phone,
+              firstName: res.firstName,
+              lastName: res.lastName,
+              profilePhoto: res.profilePhoto,
+              role: res.role,
+            }),
+          );
+
           // redirect to dashboard
           this.router.navigate(['/dashboard']);
         },

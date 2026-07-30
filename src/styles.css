@@ -2,10 +2,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-@layer tailwind-base, primeng, intl-tel-input, tailwind-utilities;
+@layer tailwind-base, primeng, primeicons, intl-tel-input, tailwind-utilities;
 
 @layer tailwind-base {
   @import 'tailwindcss/preflight.css';
+}
+
+@layer primeicons {
+  @import 'primeicons/primeicons.css';
 }
 
 @import 'tailwindcss/theme.css';
@@ -97,3 +101,20 @@ body {
   color: var(--color-red-600);
 }
 /* **************************************************************** */
+
+/* update primeNG buttons styles */
+.p-ripple .p-button {
+  border-radius: 0;
+}
+
+.remove-padding .p-button {
+  padding: 0;
+}
+
+.p-popover {
+  border-radius: 0;
+  width: 263px;
+}
+.p-popover-content {
+  padding: 0;
+}
