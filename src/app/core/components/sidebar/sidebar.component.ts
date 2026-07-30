@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, input, model } from '@angular/core';
 import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
@@ -25,9 +25,14 @@ import { PopoverModule } from 'primeng/popover';
 })
 export class SidebarComponent {
   user = JSON.parse(localStorage.getItem('examUser') || '');
+  isVisible = model();
 
-  closeCallback(e: Event) {}
+  // the close button handler
+  closeCallback(e: Event) {
+    this.isVisible.set(false);
+  }
 
+  // for the user popover (ellipsis)
   @ViewChild('op') op!: Popover;
   toggle(event: Event) {
     this.op.toggle(event);

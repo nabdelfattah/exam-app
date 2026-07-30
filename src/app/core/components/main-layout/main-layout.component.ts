@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { RippleModule } from 'primeng/ripple';
@@ -11,5 +11,5 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './main-layout.component.html',
 })
 export class MainLayoutComponent {
-  visible = true;
+  visible = signal(false);
 }
