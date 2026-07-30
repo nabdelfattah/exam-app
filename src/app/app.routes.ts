@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { AuthLayout, Notfound } from '@core/components';
 import { MainLayoutComponent } from './core/components/main-layout/main-layout.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
+import { DiplomasComponent } from './features/diplomas/diplomas.component';
 
 export const routes: Routes = [
   {
@@ -11,8 +11,25 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, title: 'dashboard' },
+      { path: '', redirectTo: 'diplomas', pathMatch: 'full' },
+      { path: 'diplomas', component: DiplomasComponent, title: 'Diplomas' },
+      {
+        path: 'exams',
+        loadComponent: () =>
+          import('./features/exams/exams.component').then((c) => c.ExamsComponent),
+        title: 'Exams',
+      },
+      {
+        path: 'questions',
+        loadComponent: () =>
+          import('./features/questions/questions.component').then((c) => c.QuestionsComponent),
+        title: 'Questions',
+      },
+      {
+        path: 'account',
+        loadChildren: () =>
+          import('./features/account/account.routes').then((c) => c.accountRoutes),
+      },
     ],
   },
   {
