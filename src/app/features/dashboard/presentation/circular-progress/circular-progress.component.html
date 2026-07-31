@@ -1,0 +1,27 @@
+<svg width="65px" height="65px" viewBox="0 0 100 100" [style.--progress-color]="progressColor">
+  <circle cx="50" cy="50" r="45" stroke="var(--color-blue-100)" stroke-width="10" fill="none" />
+
+  <circle
+    cx="50"
+    cy="50"
+    r="45"
+    fill="none"
+    stroke-width="10"
+    stroke="var(--color-primary)"
+    [attr.stroke-dasharray]="strokeDasharray"
+    [attr.stroke-dashoffset]="strokeDashoffset"
+    stroke-linecap="butt"
+    transform="rotate(-90 50 50)"
+  />
+
+  <text
+    x="50"
+    y="55"
+    text-anchor="middle"
+    font-family="var(--font-geist)"
+    font-size="18px"
+    fill="var(--color-black, #000)"
+  >
+    {{ value }}
+  </text>
+</svg>

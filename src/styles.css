@@ -31,6 +31,8 @@
   --color-gray-500: #6b7280;
   --color-gray-400: #9ca3af;
   --color-gray-200: #e5e7eb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-50: #f9fafb;
   --color-red-50: #fef2f2;
   --color-red-600: #dc2626;
   --color-green: #00bc7d;
@@ -121,5 +123,5 @@ body {
 }
 
 .p-breadcrumb-item-label {
-  @apply font-geist text-gray-400 hover:text-gray-500 transition-all duration-150;
+  @apply text-xs md:text-sm font-geist text-gray-400 hover:text-gray-500 transition-all duration-150;
 }

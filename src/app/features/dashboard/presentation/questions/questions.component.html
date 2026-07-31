@@ -10,16 +10,68 @@
 
     <app-title
       ><img src="/assets/icons/circle-question-mark-white.svg" alt="granduation cap icon" />{{
-        title() || ''
+        examTitle() || ''
       }}
       Questions</app-title
     >
   </div>
 </header>
-<!-- exams -->
-<ul class="m-6 flex flex-col gap-4">
-  @for (question of questionsList(); track question.id) {
-  } @empty {
+
+<!-- metrics (progress bar, timer) -->
+<div class="grid grid-cols-1 md:grid-cols-[1fr_auto]">
+  <!-- progress bar -->
+  <div class="flex flex-col justify-center p-6 border-r border-r-gray-200">
+    <div class="flex justify-between">
+      <p class="text-base font-geist text-black">{{ diplomaTitle() }} - {{ examTitle() }}</p>
+      <p class="text-sm font-geist text-gray-500">
+        Question {{ currentIndex() }} of {{ questionsList().length }}
+      </p>
+    </div>
+    <p-progressbar
+      [value]="progressPercent()"
+      [showValue]="false"
+      class="flex-1 rounded-none h-4"
+      styleClass="h-4"
+    />
+  </div>
+
+  <!-- timer -->
+  <app-circular-progress
+    class="p-6"
+    [value]="30"
+    [min]="0"
+    [max]="100"
+    [thresholds]="[
+      { value: 30, color: 'var(--danger)' },
+      { value: 70, color: 'var(--orange)' },
+      { value: 80, color: 'var(--success)' },
+    ]"
+  />
+</div>
+
+<!-- questions -->
+<div class="m-6">
+  @if (questionsList().length > 0) {
+    <app-question-card [question]="questionsList()[currentIndex()]" />
+    <div class="grid grid-cols-2 gap-4 py-6 py-">
+      <p-button
+        label="Previous"
+        icon="pi pi-chevron-left"
+        [text]="true"
+        [disabled]="currentIndex() === 0"
+        styleClass="py-3.5 !bg-gray-200 !text-gray-400 justify-center w-full font-geist rounded-none"
+        (onClick)="goPrevious()"
+      />
+      <p-button
+        label="Next"
+        icon="pi pi-chevron-right"
+        iconPos="right"
+        [disabled]="currentIndex() === questionsList().length"
+        styleClass="py-3.5 !bg-blue-600 justify-center w-full font-geist rounded-none"
+        (onClick)="goNext()"
+      />
+    </div>
+  } @else {
     <app-empty-state>No Questions Yet!</app-empty-state>
   }
-</ul>
+</div>

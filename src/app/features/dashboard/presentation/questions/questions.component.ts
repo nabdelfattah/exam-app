@@ -8,10 +8,24 @@ import { BreadcrumbRouterDemo } from '@/app/shared/components/breadcrumb/breadcr
 import { switchMap, tap } from 'rxjs';
 import { ExamsService } from '@app/features/dashboard/infrastructure/exams.service';
 import { Exam } from '../../domain/exam.interface';
+import { CircularProgressComponent } from '../circular-progress/circular-progress.component';
+import { label } from '@primeng/themes/aura/metergroup';
+import { MenuItem } from 'primeng/api';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { QuestionCardComponent } from '../question-card/question-card.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-questions',
-  imports: [EmptyStateComponent, TitleComponent, BreadcrumbRouterDemo],
+  imports: [
+    EmptyStateComponent,
+    TitleComponent,
+    BreadcrumbRouterDemo,
+    CircularProgressComponent,
+    ProgressBarModule,
+    QuestionCardComponent,
+    ButtonModule,
+  ],
   templateUrl: './questions.component.html',
 })
 export class QuestionsComponent {
@@ -25,11 +39,15 @@ export class QuestionsComponent {
   currentIndex = signal(0);
   selectedAnswers = signal<ExamAnswer[]>([]);
 
-  title = signal<string>('');
+  examTitle = signal<string>('');
+  diplomaTitle = signal<string>('');
+  timeLeft = '5.2';
+  progressPercent = signal<number>(50);
 
-  items = [{ label: 'Diplomas', routerLink: '/diplomas/diplomas' }, { label: 'Exams' }];
+  items: MenuItem[] = [];
 
   ngOnInit() {
+    // get question, exam title and diploma title
     this.questionService
       .getQuestions(this.id())
       .pipe(
@@ -38,13 +56,18 @@ export class QuestionsComponent {
           this.questionsList.set(questions);
         }),
         switchMap((questions) => {
-          console.log(questions[0].examId);
           return this.examService.getExamById(questions[0].examId);
         }),
       )
       .subscribe({
         next: (res: Exam) => {
-          this.title.set(res.title);
+          this.examTitle.set(res.title);
+          this.diplomaTitle.set(res.diploma.title);
+          this.items = [
+            { label: 'Diplomas', routerLink: '/diplomas/diplomas' },
+            { label: `${this.diplomaTitle() || ''}` },
+            { label: `${this.examTitle() || ''}` },
+          ];
         },
         error: () => {},
       });
@@ -53,6 +76,10 @@ export class QuestionsComponent {
   goBack() {
     this.location.back();
   }
+
+  goPrevious() {}
+
+  goNext() {}
 
   selectAnswer(questionId: string, answerId: string) {
     this.selectedAnswers.update((answers) => {
