@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const dashboardRoutes: Routes = [
+export const diplomasdRoutes: Routes = [
   {
     path: 'diplomas',
     loadComponent: () =>
@@ -8,13 +8,13 @@ export const dashboardRoutes: Routes = [
     title: 'Diplomas',
   },
   {
-    path: 'exams',
+    path: 'exams/:id',
     loadComponent: () =>
       import('./presentation/exams/exams.component').then((c) => c.ExamsComponent),
     title: 'Exams',
   },
   {
-    path: 'questions',
+    path: 'questions/:id',
     loadComponent: () =>
       import('./presentation/questions/questions.component').then((c) => c.QuestionsComponent),
     title: 'Questions',

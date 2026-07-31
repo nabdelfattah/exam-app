@@ -1,8 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
+import { BreadcrumbRouterDemo } from '@/app/shared/components/breadcrumb/breadcrumb.component';
+import { TitleComponent } from '@/app/shared/components/title/title.component';
+import { Exam } from '@app/features/dashboard/domain/exam.interface';
+import { ExamsService } from '@app/features/dashboard/infrastructure/exams.service';
+import { ExamCardComponent } from '../exam-card/exam-card.component';
+import { EmptyStateComponent } from '@/app/shared/components/empty-state/empty-state.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-exams',
-  imports: [],
+  imports: [BreadcrumbRouterDemo, TitleComponent, ExamCardComponent, EmptyStateComponent],
   templateUrl: './exams.component.html',
 })
-export class ExamsComponent {}
+export class ExamsComponent {
+  private readonly examService = inject(ExamsService);
+  private location = inject(Location);
+
+  id = input<string>(''); // auto-populated from :id
+  examsList = signal<Exam[]>([]);
+
+  items = [{ label: 'Diplomas', routerLink: '/diplomas/diplomas' }, { label: 'Exams' }];
+
+  ngOnInit() {
+    this.examService.getExams(this.id()).subscribe({
+      next: (res) => {
+        this.examsList.set(res);
+      },
+      error: () => {},
+    });
+  }
+
+  goBack() {
+    this.location.back();
+  }
+}

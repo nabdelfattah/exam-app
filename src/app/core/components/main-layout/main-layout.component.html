@@ -4,8 +4,8 @@
 <p-button (click)="visible.set(true)" icon="pi pi-bars" class="absolute lg:hidden" />
 
 <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] h-dvh">
-  <app-sidebar class="hidden lg:block" [(isVisible)]="visible" />
-  <main>
+  <app-sidebar class="hidden lg:block h-full overflow-y-auto" [(isVisible)]="visible" />
+  <main class="min-h-0 h-full overflow-y-auto">
     <router-outlet />
   </main>
 </div>
