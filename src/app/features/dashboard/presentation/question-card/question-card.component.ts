@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, model, signal } from '@angular/core';
 import { Question } from '../../domain/question.interface';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
@@ -10,5 +10,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class QuestionCardComponent {
   question = input<Question>();
-  selectedAnswer = signal<string>('');
+  selectedAnswer = model('');
+
+  ngOnInit() {
+    console.log(this.question()?.answers);
+  }
 }

@@ -24,42 +24,39 @@
     <div class="flex justify-between">
       <p class="text-base font-geist text-black">{{ diplomaTitle() }} - {{ examTitle() }}</p>
       <p class="text-sm font-geist text-gray-500">
-        Question {{ currentIndex() }} of {{ questionsList().length }}
+        Question {{ currentIndex() + 1 }} of {{ questionsList().length }}
       </p>
     </div>
+
     <p-progressbar
       [value]="progressPercent()"
       [showValue]="false"
       class="flex-1 rounded-none h-4"
-      styleClass="h-4"
+      styleClass="h-5"
     />
   </div>
 
   <!-- timer -->
-  <app-circular-progress
-    class="p-6"
-    [value]="30"
-    [min]="0"
-    [max]="100"
-    [thresholds]="[
-      { value: 30, color: 'var(--danger)' },
-      { value: 70, color: 'var(--orange)' },
-      { value: 80, color: 'var(--success)' },
-    ]"
-  />
+  <app-circular-progress [autoClock]="true" [durationMs]="60000"></app-circular-progress>
 </div>
 
 <!-- questions -->
 <div class="m-6">
   @if (questionsList().length > 0) {
-    <app-question-card [question]="questionsList()[currentIndex()]" />
+    <!-- question -->
+    <app-question-card [question]="questionsList()[currentIndex()]" [(selectedAnswer)]="answerId" />
+
+    <!-- buttons -->
     <div class="grid grid-cols-2 gap-4 py-6 py-">
       <p-button
         label="Previous"
         icon="pi pi-chevron-left"
-        [text]="true"
         [disabled]="currentIndex() === 0"
-        styleClass="py-3.5 !bg-gray-200 !text-gray-400 justify-center w-full font-geist rounded-none"
+        [styleClass]="
+          currentIndex() === 0
+            ? '!bg-gray-200 text-gray-400! py-3.5 justify-center w-full font-geist rounded-none border-0'
+            : 'bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0'
+        "
         (onClick)="goPrevious()"
       />
       <p-button
@@ -67,7 +64,11 @@
         icon="pi pi-chevron-right"
         iconPos="right"
         [disabled]="currentIndex() === questionsList().length"
-        styleClass="py-3.5 !bg-blue-600 justify-center w-full font-geist rounded-none"
+        [styleClass]="
+          currentIndex() === questionsList().length
+            ? '!bg-gray-200 text-gray-400! py-3.5 justify-center w-full font-geist rounded-none border-0'
+            : 'bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0'
+        "
         (onClick)="goNext()"
       />
     </div>

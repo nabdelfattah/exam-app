@@ -7,15 +7,15 @@
   @for (answer of question()?.answers; track answer.id) {
     <label
       [for]="answer?.id"
-      class="flex items-center gap-2.5 p-4 cursor-pointer transition-colors"
+      class="flex items-center gap-2.5 p-4 cursor-pointer transition-colors hover:bg-gray-100"
       [class.bg-gray-50]="selectedAnswer() !== answer.id"
       [class.bg-gray-100]="selectedAnswer() === answer.id"
     >
       <p-radioButton
-        [id]="answer.id"
-        [name]="answer.text"
+        [inputId]="answer.id"
+        [name]="question()?.id || ''"
         [value]="answer.id"
-        [ngModel]="selectedAnswer()"
+        [(ngModel)]="selectedAnswer"
       />
       <span class="text-black font-geist text-sm">{{ answer?.text }}</span>
     </label>

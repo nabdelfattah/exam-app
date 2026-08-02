@@ -1,7 +1,7 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, model, signal } from '@angular/core';
 import { QuestionsService } from '@app/features/dashboard/infrastructure/questions.service';
 import { ExamAnswer, Question } from '@app/features/dashboard/domain/question.interface';
-import { Location } from '@angular/common';
+import { Location, NgClass } from '@angular/common';
 import { EmptyStateComponent } from '@/app/shared/components/empty-state/empty-state.component';
 import { TitleComponent } from '@/app/shared/components/title/title.component';
 import { BreadcrumbRouterDemo } from '@/app/shared/components/breadcrumb/breadcrumb.component';
@@ -14,6 +14,7 @@ import { MenuItem } from 'primeng/api';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { QuestionCardComponent } from '../question-card/question-card.component';
 import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-questions',
@@ -25,15 +26,18 @@ import { ButtonModule } from 'primeng/button';
     ProgressBarModule,
     QuestionCardComponent,
     ButtonModule,
+    NgClass,
   ],
   templateUrl: './questions.component.html',
 })
 export class QuestionsComponent {
   private readonly questionService = inject(QuestionsService);
   private readonly examService = inject(ExamsService);
+  private readonly router = inject(Router);
   private location = inject(Location);
 
   id = input<string>(''); // exam id from param
+  answerId = model<string>(''); // exam id from param
 
   questionsList = signal<Question[]>([]);
   currentIndex = signal(0);
@@ -42,7 +46,14 @@ export class QuestionsComponent {
   examTitle = signal<string>('');
   diplomaTitle = signal<string>('');
   timeLeft = '5.2';
-  progressPercent = signal<number>(50);
+  progressPercent = computed(() => {
+    const total = this.questionsList().length;
+    // we should not divide by zero
+    if (total === 0) {
+      return 0;
+    }
+    return (this.currentIndex() / total) * 100;
+  });
 
   items: MenuItem[] = [];
 
@@ -77,9 +88,26 @@ export class QuestionsComponent {
     this.location.back();
   }
 
-  goPrevious() {}
+  goPrevious() {
+    console.log('click...');
+    console.log(this.currentIndex());
+    if (this.currentIndex() > 0) {
+      this.currentIndex.update((prev) => prev - 1);
+    }
+  }
 
-  goNext() {}
+  goNext() {
+    if (this.answerId()) {
+      // append {questionId: answerId} to the answers list and update localstorage
+      console.log(this.answerId());
+      // navigate to the next question or to the result page if exam ends
+      if (this.currentIndex() + 1 == this.questionsList().length) {
+        this.router.navigate(['diplomas', 'result']);
+      } else {
+        this.currentIndex.update((prev) => prev + 1);
+      }
+    }
+  }
 
   selectAnswer(questionId: string, answerId: string) {
     this.selectedAnswers.update((answers) => {
