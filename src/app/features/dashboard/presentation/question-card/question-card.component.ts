@@ -11,8 +11,4 @@ import { FormsModule } from '@angular/forms';
 export class QuestionCardComponent {
   question = input<Question>();
   selectedAnswer = model('');
-
-  ngOnInit() {
-    console.log(this.question()?.answers);
-  }
 }

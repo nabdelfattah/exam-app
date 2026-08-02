@@ -16,6 +16,7 @@ import { QuestionCardComponent } from '../question-card/question-card.component'
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterLink } from '@angular/router';
 import { ResultComponent } from '../result/result.component';
+import { SubmissionPayload } from '../../domain/exam-submission.interface';
 
 @Component({
   selector: 'app-questions',
@@ -35,7 +36,6 @@ import { ResultComponent } from '../result/result.component';
 export class QuestionsComponent {
   private readonly questionService = inject(QuestionsService);
   private readonly examService = inject(ExamsService);
-  private readonly router = inject(Router);
   private location = inject(Location);
 
   id = input<string>(''); // exam id from param
@@ -58,6 +58,7 @@ export class QuestionsComponent {
   });
 
   startedAt = signal<Date>(new Date());
+  resultData = signal<SubmissionPayload>({} as SubmissionPayload);
 
   items: MenuItem[] = [];
 
@@ -105,16 +106,18 @@ export class QuestionsComponent {
       this.selectAnswer(questionId, answerId);
       // navigate to the next question or display result if exam ends
       if (this.currentIndex() + 1 == this.questionsList().length) {
+        console.log('submit exam...');
+
         // submit the exam
         this.examService
           .submitExam({
-            examId: this.examTitle(),
+            examId: this.id(),
             answers: this.selectedAnswers(),
             startedAt: this.startedAt().toISOString(),
           })
           .subscribe({
-            next: (res) => {
-              console.log(res);
+            next: (res: SubmissionPayload) => {
+              this.resultData.set(res);
             },
             error: (err) => {
               console.log(err);

@@ -25,6 +25,7 @@ export class ExamsService {
   }
 
   submitExam(data: ExamSubmission): Observable<any> {
+    console.log('INSIDE SUBMIT EXAM FUNCTION...');
     return this.httpClient.post<any>(`${environment.baseUrl}submissions`, data);
   }
 }
