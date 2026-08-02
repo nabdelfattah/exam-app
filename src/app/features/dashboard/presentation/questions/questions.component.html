@@ -31,48 +31,80 @@
     <p-progressbar
       [value]="progressPercent()"
       [showValue]="false"
-      class="flex-1 rounded-none h-4"
+      class="rounded-none h-4"
       styleClass="h-5"
     />
   </div>
 
-  <!-- timer -->
-  <app-circular-progress [autoClock]="true" [durationMs]="60000"></app-circular-progress>
+  @if (currentIndex() + 1 !== questionsList().length) {
+    <!-- timer only visible during exam -->
+    <div class="p-4 lg:p-6">
+      <app-circular-progress [autoClock]="true" [durationMs]="60000"></app-circular-progress>
+    </div>
+  }
 </div>
 
-<!-- questions -->
-<div class="m-6">
-  @if (questionsList().length > 0) {
-    <!-- question -->
-    <app-question-card [question]="questionsList()[currentIndex()]" [(selectedAnswer)]="answerId" />
+<!-- questions or result -->
+@if (currentIndex() + 1 != questionsList().length) {
+  <div class="m-6">
+    @if (questionsList().length > 0) {
+      <!-- question -->
+      <app-question-card
+        [question]="questionsList()[currentIndex()]"
+        [(selectedAnswer)]="answerId"
+      />
+
+      <!-- buttons -->
+      <div class="grid grid-cols-2 gap-4 py-6 py-">
+        <p-button
+          label="Previous"
+          icon="pi pi-chevron-left"
+          [disabled]="currentIndex() === 0"
+          [styleClass]="
+            currentIndex() === 0
+              ? '!bg-gray-200 text-gray-400! py-3.5 justify-center w-full font-geist rounded-none border-0'
+              : 'bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0'
+          "
+          (onClick)="goPrevious()"
+        />
+        <p-button
+          label="Next"
+          icon="pi pi-chevron-right"
+          iconPos="right"
+          [disabled]="currentIndex() === questionsList().length"
+          [styleClass]="
+            currentIndex() === questionsList().length
+              ? '!bg-gray-200 text-gray-400! py-3.5 justify-center w-full font-geist rounded-none border-0'
+              : 'bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0'
+          "
+          (onClick)="goNext()"
+        />
+      </div>
+    } @else {
+      <app-empty-state>No Questions Yet!</app-empty-state>
+    }
+  </div>
+} @else {
+  <!-- show result -->
+  <div class="m-6">
+    <app-result />
 
     <!-- buttons -->
     <div class="grid grid-cols-2 gap-4 py-6 py-">
       <p-button
-        label="Previous"
-        icon="pi pi-chevron-left"
-        [disabled]="currentIndex() === 0"
-        [styleClass]="
-          currentIndex() === 0
-            ? '!bg-gray-200 text-gray-400! py-3.5 justify-center w-full font-geist rounded-none border-0'
-            : 'bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0'
-        "
-        (onClick)="goPrevious()"
-      />
+        label="Restart"
+        styleClass="!bg-gray-200 hover:bg-gray-50 text-black! transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0"
+        (onClick)="restart()"
+        ><ng-template #icon>
+          <img src="/assets/icons/rotate-ccw.svg" alt="" class="w-4 h-4" /> </ng-template
+      ></p-button>
       <p-button
-        label="Next"
-        icon="pi pi-chevron-right"
-        iconPos="right"
-        [disabled]="currentIndex() === questionsList().length"
-        [styleClass]="
-          currentIndex() === questionsList().length
-            ? '!bg-gray-200 text-gray-400! py-3.5 justify-center w-full font-geist rounded-none border-0'
-            : 'bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0'
-        "
-        (onClick)="goNext()"
-      />
+        label="Explore"
+        styleClass="bg-primary text-white hover:bg-primary-dark transition duration-300 py-3.5 justify-center w-full font-geist rounded-none border-0"
+        [routerLink]="['/diplomas/diplomas']"
+        ><ng-template #icon>
+          <img src="/assets/icons/folder-search.svg" alt="" class="w-4 h-4" /> </ng-template
+      ></p-button>
     </div>
-  } @else {
-    <app-empty-state>No Questions Yet!</app-empty-state>
-  }
-</div>
+  </div>
+}

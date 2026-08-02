@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, model, signal } from '@angular/core';
 import { QuestionsService } from '@app/features/dashboard/infrastructure/questions.service';
 import { ExamAnswer, Question } from '@app/features/dashboard/domain/question.interface';
-import { Location, NgClass } from '@angular/common';
+import { Location } from '@angular/common';
 import { EmptyStateComponent } from '@/app/shared/components/empty-state/empty-state.component';
 import { TitleComponent } from '@/app/shared/components/title/title.component';
 import { BreadcrumbRouterDemo } from '@/app/shared/components/breadcrumb/breadcrumb.component';
@@ -14,7 +14,8 @@ import { MenuItem } from 'primeng/api';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { QuestionCardComponent } from '../question-card/question-card.component';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-questions',
@@ -26,7 +27,8 @@ import { Router } from '@angular/router';
     ProgressBarModule,
     QuestionCardComponent,
     ButtonModule,
-    NgClass,
+    ResultComponent,
+    RouterLink,
   ],
   templateUrl: './questions.component.html',
 })
@@ -55,6 +57,8 @@ export class QuestionsComponent {
     return (this.currentIndex() / total) * 100;
   });
 
+  startedAt = signal<Date>(new Date());
+
   items: MenuItem[] = [];
 
   ngOnInit() {
@@ -63,7 +67,6 @@ export class QuestionsComponent {
       .getQuestions(this.id())
       .pipe(
         tap((questions) => {
-          console.log(questions);
           this.questionsList.set(questions);
         }),
         switchMap((questions) => {
@@ -89,8 +92,6 @@ export class QuestionsComponent {
   }
 
   goPrevious() {
-    console.log('click...');
-    console.log(this.currentIndex());
     if (this.currentIndex() > 0) {
       this.currentIndex.update((prev) => prev - 1);
     }
@@ -99,27 +100,51 @@ export class QuestionsComponent {
   goNext() {
     if (this.answerId()) {
       // append {questionId: answerId} to the answers list and update localstorage
-      console.log(this.answerId());
-      // navigate to the next question or to the result page if exam ends
+      const questionId = this.questionsList()[this.currentIndex()].id;
+      const answerId = this.answerId();
+      this.selectAnswer(questionId, answerId);
+      // navigate to the next question or display result if exam ends
       if (this.currentIndex() + 1 == this.questionsList().length) {
-        this.router.navigate(['diplomas', 'result']);
+        // submit the exam
+        this.examService
+          .submitExam({
+            examId: this.examTitle(),
+            answers: this.selectedAnswers(),
+            startedAt: this.startedAt().toISOString(),
+          })
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
       } else {
         this.currentIndex.update((prev) => prev + 1);
       }
     }
   }
 
+  restart() {
+    this.currentIndex.set(0);
+    this.selectedAnswers.set([]);
+    this.startedAt.set(new Date());
+  }
+
   selectAnswer(questionId: string, answerId: string) {
+    // undate the selectedAnswers signal
+    // for each object in the array search for the question id
+    // if you find it (index not -1) update the record else add the record
     this.selectedAnswers.update((answers) => {
       const index = answers.findIndex((a) => a.questionId === questionId);
-
       if (index === -1) {
-        // First answer for this question
+        // First answer for this question (add the record)
         return [...answers, { questionId, answerId }];
+      } else {
+        // update the existing record
+        return answers.map((a) => (a.questionId === questionId ? { ...a, answerId } : a));
       }
-
-      // Update existing answer
-      return answers.map((a) => (a.questionId === questionId ? { ...a, answerId } : a));
     });
   }
 }

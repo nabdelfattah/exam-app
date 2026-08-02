@@ -19,10 +19,4 @@ export const diplomasdRoutes: Routes = [
       import('./presentation/questions/questions.component').then((c) => c.QuestionsComponent),
     title: 'Questions',
   },
-  {
-    path: 'result',
-    loadComponent: () =>
-      import('./presentation/result-page/result-page.component').then((c) => c.ResultPageComponent),
-    title: 'Result',
-  },
 ];
