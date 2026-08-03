@@ -45,7 +45,7 @@
 </div>
 
 <!-- questions or result -->
-@if (currentIndex() + 1 != questionsList().length) {
+@if (!isSubmitted()) {
   <div class="m-6">
     @if (questionsList().length > 0) {
       <!-- question -->

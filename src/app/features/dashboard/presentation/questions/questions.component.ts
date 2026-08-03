@@ -62,6 +62,8 @@ export class QuestionsComponent {
 
   items: MenuItem[] = [];
 
+  isSubmitted = signal(false);
+
   ngOnInit() {
     // get question, exam title and diploma title
     this.questionService
@@ -117,9 +119,11 @@ export class QuestionsComponent {
             startedAt: this.startedAt().toISOString(),
           })
           .subscribe({
-            next: (res: SubmissionPayload) => {
+            next: (res) => {
               console.log({ res });
               this.resultData.set(res);
+
+              this.isSubmitted.set(true);
             },
             error: (err) => {
               console.log(err);
