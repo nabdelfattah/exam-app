@@ -9,7 +9,7 @@ import { Component, input } from '@angular/core';
 export class ResultComponent {
   data = input<SubmissionPayload>();
 
-  ngOnChange() {
+  ngOnInit() {
     console.log(this.data());
   }
 }

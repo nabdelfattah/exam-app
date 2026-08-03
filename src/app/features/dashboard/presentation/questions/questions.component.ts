@@ -100,6 +100,7 @@ export class QuestionsComponent {
 
   goNext() {
     if (this.answerId()) {
+      console.log('answerId =', this.answerId());
       // append {questionId: answerId} to the answers list and update localstorage
       const questionId = this.questionsList()[this.currentIndex()].id;
       const answerId = this.answerId();
@@ -117,6 +118,7 @@ export class QuestionsComponent {
           })
           .subscribe({
             next: (res: SubmissionPayload) => {
+              console.log({ res });
               this.resultData.set(res);
             },
             error: (err) => {

@@ -1,4 +1,4 @@
-import { Component, input, model, signal } from '@angular/core';
+import { Component, effect, input, model, signal } from '@angular/core';
 import { Question } from '../../domain/question.interface';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';

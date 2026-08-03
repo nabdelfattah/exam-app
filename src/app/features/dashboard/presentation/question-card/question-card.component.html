@@ -17,6 +17,7 @@
         [value]="answer.id"
         [(ngModel)]="selectedAnswer"
       />
+      {{ selectedAnswer() }}
       <span class="text-black font-geist text-sm">{{ answer?.text }}</span>
     </label>
   }
