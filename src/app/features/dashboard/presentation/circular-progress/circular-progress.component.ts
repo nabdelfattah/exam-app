@@ -48,11 +48,7 @@ export class CircularProgressComponent implements OnInit, OnChanges, OnDestroy {
   private lastSecondTick = -1;
 
   ngOnInit() {
-    if (this.autoClock) {
-      this.startClock();
-    } else {
-      this.updateProgress();
-    }
+    this.initializeProgress();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -63,6 +59,14 @@ export class CircularProgressComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.stopClock();
+  }
+
+  initializeProgress() {
+    if (this.autoClock) {
+      this.startClock();
+    } else {
+      this.updateProgress();
+    }
   }
 
   private startClock() {
