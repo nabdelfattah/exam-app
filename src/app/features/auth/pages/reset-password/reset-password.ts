@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@
 import { Router } from '@angular/router';
 import { Button, Field, Link, Toast } from '@/app/shared/components';
 import { MessageService } from 'primeng/api';
+import { confirmPassword } from '../../utils/utils';
 
 @Component({
   selector: 'app-reset-password',
@@ -30,7 +31,7 @@ export class ResetPassword {
       ],
       rePassword: ['', [Validators.required]],
     },
-    { validators: [this.confirmPassword] },
+    { validators: [confirmPassword] },
   );
 
   submitHandler() {
@@ -63,21 +64,6 @@ export class ResetPassword {
       // display toast
       this.errMsg.set('Form Fields are not valid.');
       this.displayToast.set(true);
-    }
-  }
-
-  confirmPassword(group: AbstractControl) {
-    const password = group.get('password')?.value;
-    const rePassword = group.get('rePassword')?.value;
-
-    if (rePassword !== password && rePassword !== '') {
-      // put error to the form control (rePassword)
-      group.get('rePassword')?.setErrors({ mismatch: true });
-
-      // put error to the form itself
-      return { mismatch: true };
-    } else {
-      return null;
     }
   }
 }

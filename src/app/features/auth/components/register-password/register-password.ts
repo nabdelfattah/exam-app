@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { AbstractControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button, Field, Toast } from '@/app/shared/components';
 import { RegisterFlowService } from '../../services/register-flow-service';
@@ -62,21 +62,6 @@ export class RegisterPassword {
       // display toast
       this.errMsg.set('Form Field is not valid.');
       this.displayToast.set(true);
-    }
-  }
-
-  confirmPassword(group: AbstractControl) {
-    const password = group.get('password')?.value;
-    const rePassword = group.get('rePassword')?.value;
-
-    if (rePassword !== password && rePassword !== '') {
-      // put error to the form control (rePassword)
-      group.get('rePassword')?.setErrors({ mismatch: true });
-
-      // put error to the form itself
-      return { mismatch: true };
-    } else {
-      return null;
     }
   }
 }
