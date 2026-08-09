@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Button, Field, Toast, Link } from '@shared/components';
 import { AuthFlowService } from '../../services/auth-flow-service';
 import { RegisterFlowService } from '../../services/register-flow-service';
-import { AuthService } from '../../../../../../dist/ngx-iam-auth';
+import { AuthService } from 'ngx-iam-auth';
 import { MessageService } from 'primeng/api';
 
 @Component({

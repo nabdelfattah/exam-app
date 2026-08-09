@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button, Field, Toast } from '@/app/shared/components';
 import { RegisterFlowService } from '../../services/register-flow-service';
-import { AuthService } from '../../../../../../dist/ngx-iam-auth';
+import { AuthService } from 'ngx-iam-auth';
 import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-register-password',
