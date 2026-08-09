@@ -45,7 +45,7 @@ export class ForgetPassword {
             this.router.navigate(['/check-email']);
           },
           error: (err) => {
-            this.errMsg.set(err.error.message);
+            this.errMsg.set(err.error?.message ?? 'Something went wrong');
             this.displayToast.set(true);
           },
         });

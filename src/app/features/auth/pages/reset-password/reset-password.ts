@@ -1,5 +1,5 @@
 import { AuthService } from 'ngx-iam-auth';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button, Field, Link, Toast } from '@/app/shared/components';
@@ -16,6 +16,7 @@ export class ResetPassword {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly messageService = inject(MessageService);
+  token = input<string>('');
 
   errMsg = signal('Something Went Wrong!');
   displayToast = signal(false);
@@ -39,7 +40,7 @@ export class ResetPassword {
       // send request to backend
       this.authService
         .resetPassword({
-          token: 'string',
+          token: this.token(),
           newPassword: this.resetForm.get('password')?.value || '',
           confirmPassword: this.resetForm.get('rePassword')?.value || '',
         })
