@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, model, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, model, signal } from '@angular/core';
 import { QuestionsService } from '@app/features/dashboard/infrastructure/questions.service';
 import { ExamAnswer, Question } from '@app/features/dashboard/domain/question.interface';
 import { Location } from '@angular/common';
@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { Router, RouterLink } from '@angular/router';
 import { ResultComponent } from '../result/result.component';
 import { SubmissionPayload } from '../../domain/exam-submission.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-questions',
@@ -37,6 +38,7 @@ export class QuestionsComponent {
   private readonly questionService = inject(QuestionsService);
   private readonly examService = inject(ExamsService);
   private location = inject(Location);
+  private readonly destroyRef = inject(DestroyRef);
 
   id = input<string>(''); // exam id from param
   answerId = model<string>(''); // exam id from param
@@ -65,6 +67,10 @@ export class QuestionsComponent {
   isSubmitted = signal(false);
 
   ngOnInit() {
+    this.getQuestions();
+  }
+
+  getQuestions() {
     // get question, exam title and diploma title
     this.questionService
       .getQuestions(this.id())
@@ -75,6 +81,7 @@ export class QuestionsComponent {
         switchMap((questions) => {
           return this.examService.getExamById(questions[0].examId);
         }),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
         next: (res: Exam) => {
