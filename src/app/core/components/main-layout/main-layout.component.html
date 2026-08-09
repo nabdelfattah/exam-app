@@ -1,30 +1,15 @@
-<div>
-  <aside>
-    <!-- logo and nav -->
-    <div>
-      <div>
-        <a routerLink="/" class="flex items-center gap-2.5">
-          <img src="" alt="elevate logo" />
-          <img class="h-10" src="/folder-code.svg" alt="exam app logo" /><span
-            class="font-semibold font-geist text-xl text-primary"
-            >Exam App</span
-          ></a
-        >
-      </div>
-      <nav>
-        <a routerLink=""><img src="" alt="" /><span>Diplomas</span></a>
-        <a routerLink=""><img src="" alt="" /><span>Account Settings</span></a>
-      </nav>
-    </div>
-    <!-- user card -->
-    <div>
-      <img />
-      <div>
-        <p></p>
-        <p></p>
-      </div>
-      <!-- ellipsis button -->
-    </div>
-  </aside>
-  <router-outlet />
+<p-drawer #drawerRef class="absolute" [(visible)]="visible">
+  <ng-template #headless> <app-sidebar [(isVisible)]="visible" /></ng-template>
+</p-drawer>
+<p-button
+  (click)="visible.set(true)"
+  icon="pi pi-bars"
+  class="absolute top-1.5 right-1.5 lg:hidden"
+/>
+
+<div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] h-dvh">
+  <app-sidebar class="hidden lg:block h-full overflow-y-auto" [(isVisible)]="visible" />
+  <main class="min-h-0 h-full overflow-y-auto mt-10 lg:mt-0">
+    <router-outlet />
+  </main>
 </div>

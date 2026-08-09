@@ -1,9 +1,10 @@
 import { Component, inject, signal, ViewChild, viewChild } from '@angular/core';
 import { Field, Button, Link, Toast } from '@shared/components';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from 'ngx-iam-auth';
+import { AuthService } from '../../../../../../dist/ngx-iam-auth';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { passwordPattern } from '../../utils/patterns';
 @Component({
   selector: 'app-login',
   imports: [Field, Button, Link, Toast, ReactiveFormsModule],
@@ -20,13 +21,7 @@ export class Login {
   displayToast = signal(false);
   loginForm = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
-      ],
-    ],
+    password: ['', [Validators.required, Validators.pattern(passwordPattern)]],
   });
 
   submitHandler() {
@@ -38,10 +33,23 @@ export class Login {
             severity: 'success',
             detail: 'You logged in successfully!',
           });
-          // store token
+          // store token and user data
           localStorage.setItem('examToken', res.token);
+          localStorage.setItem(
+            'examUser',
+            JSON.stringify({
+              username: res.username,
+              email: res.email,
+              phone: res.phone,
+              firstName: res.firstName,
+              lastName: res.lastName,
+              profilePhoto: res.profilePhoto,
+              role: res.role,
+            }),
+          );
+
           // redirect to dashboard
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/diplomas']);
         },
         error: (err) => {
           this.errMsg.set(err.error.message);

@@ -3,8 +3,6 @@ import { Button, Toast, Field, InputMessage } from '@/app/shared/components';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import IntlTelInputWithUtils from '@intl-tel-input/angular/with-utils';
 import { RegisterFlowService } from '../../services/register-flow-service';
-import { AuthService } from 'ngx-iam-auth';
-import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-register-info',
   imports: [Button, Toast, Field, ReactiveFormsModule, IntlTelInputWithUtils, InputMessage],

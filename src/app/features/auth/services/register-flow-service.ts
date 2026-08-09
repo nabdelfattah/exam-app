@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { confirmPassword } from '../utils/utils';
+import { passwordPattern } from '../utils/patterns';
 
 const STORAGE_KEY = 'register-flow-draft';
 
@@ -23,16 +25,10 @@ export class RegisterFlowService {
     }),
     passwordForm: this.fb.group(
       {
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
-          ],
-        ],
+        password: ['', [Validators.required, Validators.pattern(passwordPattern)]],
         rePassword: ['', [Validators.required]],
       },
-      { validators: [this.confirmPassword] },
+      { validators: [confirmPassword] },
     ),
   });
 
@@ -62,11 +58,11 @@ export class RegisterFlowService {
     return this.form.get('passwordForm') as FormGroup;
   }
 
-  private confirmPassword(group: FormGroup): ValidationErrors | null {
-    const password = group.get('password')?.value;
-    const rePassword = group.get('rePassword')?.value;
-    return password === rePassword ? null : { mismatch: true };
-  }
+  // private confirmPassword(group: FormGroup): ValidationErrors | null {
+  //   const password = group.get('password')?.value;
+  //   const rePassword = group.get('rePassword')?.value;
+  //   return password === rePassword ? null : { mismatch: true };
+  // }
 
   private restoreFromStorage(): void {
     const saved = sessionStorage.getItem(STORAGE_KEY);

@@ -4,7 +4,7 @@ import { Button, Toast, InputMessage } from '@shared/components';
 import { AuthFlowService } from '../../services/auth-flow-service';
 import { InputOtpModule } from 'primeng/inputotp';
 import { RegisterFlowService } from '../../services/register-flow-service';
-import { AuthService } from 'ngx-iam-auth';
+import { AuthService } from '../../../../../../dist/ngx-iam-auth';
 import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-register-otp',

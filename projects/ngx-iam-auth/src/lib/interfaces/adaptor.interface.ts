@@ -1,5 +1,5 @@
-import { LoginRes } from './login.interface';
+import { LoginRes, LoginRowRes } from './login.interface';
 
 export interface Adaptor {
-  adapt(data: any): LoginRes;
+  adapt(data: LoginRowRes): LoginRes;
 }
