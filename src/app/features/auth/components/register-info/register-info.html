@@ -1,0 +1,68 @@
+<div>
+  <h1 class="h1 mb-1.5">Create Account</h1>
+  <p class="blue-heading mb-8">Tell us more about you</p>
+
+  <form [formGroup]="infoForm" (ngSubmit)="submitHandler()">
+    <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+        <app-field
+          controlName="fName"
+          label="First name*"
+          placeholder="Ahmed"
+          type="text"
+          [errorMessages]="{
+            required: 'First name is required',
+          }"
+        />
+        <app-field
+          controlName="lName"
+          label="Last name*"
+          placeholder="Abdullah"
+          type="text"
+          [errorMessages]="{
+            required: 'Last name is required',
+          }"
+        />
+      </div>
+      <app-field
+        controlName="username"
+        label="Username*"
+        placeholder="user123"
+        type="text"
+        [errorMessages]="{
+          required: 'Username is required',
+          minlength: 'Minimum length is 3 characters',
+        }"
+      />
+      <div
+        class="flex flex-col"
+        [class.phone-invalid]="infoForm.get('phone')?.invalid && infoForm.get('phone')?.touched"
+      >
+        <label class="font-geist text-base font-medium">Phone</label>
+        <intl-tel-input
+          formControlName="phone"
+          initialCountry="eg"
+          [separateDialCode]="true"
+          containerClass="border border-gray-200 rounded-none w-full"
+          [inputAttributes]="{ class: 'py-3.5 px-2.5 w-full' }"
+          (numberChange)="onPhoneChange($event)"
+        />
+        @if (infoForm.get('phone')?.invalid && infoForm.get('phone')?.touched) {
+          <app-input-message>Please enter a valid phone number</app-input-message>
+        }
+      </div>
+    </div>
+
+    <!-- toast -->
+    @if (displayToast()) {
+      <app-toast (toastEvent)="displayToast.set($event)" [message]="errMsg()" />
+    }
+
+    <!-- next button -->
+    <div class="mt-10">
+      <app-button label="Next" type="submit" variant="outline"
+        ><img src="/assets/icons/chevron-right-dark.svg" alt="arrow icon" class="order-last w-4"
+      /></app-button>
+    </div>
+  </form>
+</div>
