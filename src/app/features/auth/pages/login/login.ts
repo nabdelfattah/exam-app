@@ -1,7 +1,7 @@
 import { Component, inject, signal, ViewChild, viewChild } from '@angular/core';
 import { Field, Button, Link, Toast } from '@shared/components';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../../../../dist/ngx-iam-auth';
+import { AuthService } from 'ngx-iam-auth';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { passwordPattern } from '../../utils/patterns';
