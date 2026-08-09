@@ -1,11 +1,12 @@
 import { AuthService } from 'ngx-iam-auth';
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button, Field, Link, Toast } from '@/app/shared/components';
 import { MessageService } from 'primeng/api';
 import { confirmPassword } from '../../utils/utils';
 import { passwordPattern } from '../../utils/patterns';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,6 +18,9 @@ export class ResetPassword {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly messageService = inject(MessageService);
+
+  private readonly destroyRef = inject(DestroyRef);
+
   token = input<string>('');
 
   errMsg = signal('Something Went Wrong!');
@@ -37,8 +41,10 @@ export class ResetPassword {
         .resetPassword({
           token: this.token(),
           newPassword: this.resetForm.get('password')?.value || '',
+
           confirmPassword: this.resetForm.get('rePassword')?.value || '',
         })
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (res: any) => {
             this.messageService.add({
