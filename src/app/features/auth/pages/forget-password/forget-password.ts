@@ -3,7 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthFlowService } from '../../services/auth-flow-service';
-import { AuthService } from 'ngx-iam-auth';
+import { AuthService } from '../../../../../../dist/ngx-iam-auth';
 import { MessageService } from 'primeng/api';
 
 @Component({

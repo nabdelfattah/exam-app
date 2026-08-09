@@ -1,4 +1,4 @@
-import { AuthService } from 'ngx-iam-auth';
+import { AuthService } from '../../../../../../dist/ngx-iam-auth';
 import { Component, DestroyRef, inject, input, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
