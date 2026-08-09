@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Diploma } from '../domain/diploma.interface';
+import { Diploma, DiplomasRes } from '../domain/diploma.interface';
 import { environment } from '@/environments/environment';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class DiplomasService {
 
   getDiplomas(): Observable<Diploma[]> {
     return this.httpClient
-      .get<any>(`${environment.baseUrl}diplomas?page=1&limit=12`)
+      .get<DiplomasRes>(`${environment.baseUrl}diplomas?page=1&limit=12`)
       .pipe(map((res) => res.payload.data));
   }
 }

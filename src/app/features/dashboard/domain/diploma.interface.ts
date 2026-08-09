@@ -7,3 +7,18 @@ export interface Diploma {
   createdAt: string;
   updatedAt: string;
 }
+export interface DiplomasRes {
+  code: number;
+  success: boolean;
+  payload: {
+    data: {
+      id: string;
+      title: string;
+      description: string;
+      image: string;
+      immutable: boolean;
+      createdAt: string;
+      updatedAt: string;
+    }[];
+  };
+}
