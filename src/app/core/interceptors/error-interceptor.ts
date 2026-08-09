@@ -13,6 +13,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((err) => {
+      // if unauthorized (token expired) log the user out and redirect to /login
+      if (err.code == 401) {
+        localStorage.removeItem('examToken');
+        localStorage.removeItem('examUser');
+      }
       // display error message in toaster Only in non auth pages
       if (!isAuthPage) {
         messageService.add({ severity: 'error', detail: err.error.message });
