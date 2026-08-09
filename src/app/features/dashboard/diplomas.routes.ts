@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const diplomasdRoutes: Routes = [
   {
-    path: 'diplomas',
+    path: '',
     loadComponent: () =>
       import('./presentation/diplomas/diplomas.component').then((c) => c.DiplomasComponent),
     title: 'Diplomas',

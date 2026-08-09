@@ -54,7 +54,7 @@ export class Login {
           );
 
           // redirect to dashboard
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/diplomas']);
         },
         error: (err) => {
           this.errMsg.set(err.error.message);

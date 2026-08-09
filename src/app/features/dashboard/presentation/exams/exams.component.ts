@@ -19,7 +19,7 @@ export class ExamsComponent {
   id = input<string>(''); // auto-populated from :id
   examsList = signal<Exam[]>([]);
 
-  items = [{ label: 'Diplomas', routerLink: '/diplomas/diplomas' }, { label: 'Exams' }];
+  items = [{ label: 'Diplomas', routerLink: '/diplomas' }, { label: 'Exams' }];
 
   ngOnInit() {
     this.examService.getExams(this.id()).subscribe({

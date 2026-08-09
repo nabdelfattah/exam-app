@@ -15,7 +15,7 @@ export class DiplomasComponent implements OnInit {
   private readonly diplomaService = inject(DiplomasService);
   diplomasList = signal<Diploma[]>([]);
 
-  items = [{ label: 'Diplomas', routerLink: '/diplomas/diplomas' }];
+  items = [{ label: 'Diplomas', routerLink: '/diplomas' }];
 
   ngOnInit() {
     this.diplomaService.getDiplomas().subscribe({

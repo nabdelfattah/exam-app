@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'diplomas/diplomas', pathMatch: 'full' },
+      { path: '', redirectTo: 'diplomas', pathMatch: 'full' },
       {
         path: 'diplomas',
         loadChildren: () =>

@@ -45,8 +45,8 @@ export class RegisterPassword {
             severity: 'success',
             detail: 'You created an accout successfully!',
           });
-          // redirect to the login page
-          this.router.navigate(['/dashboard']);
+          // redirect to the dashboard
+          this.router.navigate(['/diplomas']);
         },
         error: (err) => {
           // display toast

@@ -81,7 +81,7 @@ export class QuestionsComponent {
           this.examTitle.set(res.title);
           this.diplomaTitle.set(res.diploma.title);
           this.items = [
-            { label: 'Diplomas', routerLink: '/diplomas/diplomas' },
+            { label: 'Diplomas', routerLink: '/diplomas' },
             { label: `${this.diplomaTitle() || ''}` },
             { label: `${this.examTitle() || ''}` },
           ];
