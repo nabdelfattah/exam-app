@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { confirmPassword } from '../utils/utils';
+import { passwordPattern } from '../utils/patterns';
 
 const STORAGE_KEY = 'register-flow-draft';
 
@@ -24,13 +25,7 @@ export class RegisterFlowService {
     }),
     passwordForm: this.fb.group(
       {
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
-          ],
-        ],
+        password: ['', [Validators.required, Validators.pattern(passwordPattern)]],
         rePassword: ['', [Validators.required]],
       },
       { validators: [confirmPassword] },

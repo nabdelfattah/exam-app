@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Button, Field, Link, Toast } from '@/app/shared/components';
 import { MessageService } from 'primeng/api';
 import { confirmPassword } from '../../utils/utils';
+import { passwordPattern } from '../../utils/patterns';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,13 +24,7 @@ export class ResetPassword {
 
   resetForm = this.fb.nonNullable.group(
     {
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
-        ],
-      ],
+      password: ['', [Validators.required, Validators.pattern(passwordPattern)]],
       rePassword: ['', [Validators.required]],
     },
     { validators: [confirmPassword] },
