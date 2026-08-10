@@ -1,0 +1,16 @@
+<header>
+  <app-breadcrumb [items]="items" />
+  <div class="p-6">
+    <app-title
+      ><img src="/assets/icons/graduation-cap.svg" alt="granduation cap icon" />Diplomas</app-title
+    >
+  </div>
+</header>
+<!-- diplomas -->
+<ul class="m-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
+  @for (diploma of diplomasList(); track diploma.id) {
+    <app-diploma-card [data]="diploma" />
+  } @empty {
+    <app-empty-state>No Diplomas Yet!</app-empty-state>
+  }
+</ul>

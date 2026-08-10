@@ -1,3 +1,127 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@layer tailwind-base, primeng, primeicons, intl-tel-input, tailwind-utilities;
+
+@layer tailwind-base {
+  @import 'tailwindcss/preflight.css';
+}
+
+@layer primeicons {
+  @import 'primeicons/primeicons.css';
+}
+
+@import 'tailwindcss/theme.css';
+
+@layer tailwind-utilities {
+  @import 'tailwindcss/utilities.css';
+}
+
+@theme {
+  --font-geist: 'Geist Mono', monospace;
+  --font-inter: 'Inter', sans-seri;
+  --color-primary: #155dfc;
+  --color-primary-dark: #1447e6;
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bedbff;
+  --color-black: #1f2937;
+  --color-gray-700: #374151;
+  --color-gray-500: #6b7280;
+  --color-gray-400: #9ca3af;
+  --color-gray-200: #e5e7eb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-50: #f9fafb;
+  --color-red-50: #fef2f2;
+  --color-red-600: #dc2626;
+  --color-green: #00bc7d;
+}
+
+/* intl-tel-input */
+@layer intl-tel-input {
+  @import 'intl-tel-input/dist/css/intlTelInput.css';
+}
+:root {
+  --iti-path-flags-1x: url('/assets/intl-tel-input/flags.webp');
+  --iti-path-flags-2x: url('/assets/intl-tel-input/flags@2x.webp');
+}
+@utility h1 {
+  @apply font-bold text-2xl lg:text-3xl font-inter;
+}
+@utility blue-heading {
+  @apply font-inter font-bold text-2xl text-primary my-2.5;
+}
+@utility description {
+  @apply text-gray-500 text-base font-geist;
+}
+
+body {
+  color: var(--color-black);
+  font-family: 'Inter', sans-seri;
+}
+
+.register-stepper .step-diamond-btn + .p-stepper-separator {
+  @apply flex-1 h-0 border-t-2 border-dashed border-primary bg-transparent;
+}
+
+.register-stepper .step-diamond-btn.passed + .p-stepper-separator {
+  @apply border-solid;
+}
+.phone-invalid .iti {
+  border-color: var(--color-red-600);
+}
+
+/* restyle primeNG toast ***************************************** */
+.p-toast-message-text {
+  flex-direction: row;
+}
+.p-toast .p-toast-message {
+  background: var(--color-black); /* your dark surface token */
+  border-radius: 1px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+}
+
+.p-toast .p-toast-message-content {
+  padding: 0.875rem 1rem;
+  gap: 0.625rem;
+}
+
+.p-toast .p-toast-summary,
+.p-toast .p-toast-detail {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.875rem;
+  color: white;
+}
+
+/* icon color only — success */
+.p-toast .p-toast-message-success .p-toast-message-icon {
+  color: var(--color-green);
+}
+
+/* icon color only — error */
+.p-toast .p-toast-message-error .p-toast-message-icon {
+  color: var(--color-red-600);
+}
+/* **************************************************************** */
+
+/* update primeNG buttons styles */
+.p-ripple .p-button {
+  border-radius: 0;
+}
+
+.remove-padding .p-button {
+  padding: 0;
+}
+
+.p-popover {
+  border-radius: 0;
+  width: 263px;
+}
+.p-popover-content {
+  padding: 0;
+}
+
+.p-breadcrumb-item-label {
+  @apply text-xs md:text-sm font-geist text-gray-400 hover:text-gray-500 transition-all duration-150;
+}

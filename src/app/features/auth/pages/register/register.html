@@ -1,0 +1,203 @@
+<div class="lg:w-113 min-w-80 p-5">
+  <p-stepper [(value)]="currentStep" class="register-stepper">
+    <p-step-list>
+      <p-step [value]="1" class="p-0 gap-0">
+        <ng-template
+          #content
+          let-activateCallback="activateCallback"
+          let-value="value"
+          let-active="active"
+        >
+          <button
+            class="step-diamond-btn"
+            (click)="activateCallback()"
+            type="button"
+            [class.passed]="value < currentStep()"
+            [class.active]="active"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="14.8491"
+                width="21"
+                height="21"
+                transform="rotate(45 14.8491 0)"
+                [attr.fill]="active ? 'var(--color-blue-100)' : 'transparent'"
+              />
+              <rect
+                x="14.8491"
+                y="7.42871"
+                width="10"
+                height="10"
+                transform="rotate(45 14.8491 7.42871)"
+                [attr.fill]="value > currentStep() ? 'transparent' : 'var(--color-primary)'"
+                [attr.stroke]="'var(--color-primary)'"
+              />
+            </svg>
+          </button>
+        </ng-template>
+      </p-step>
+
+      <p-step [value]="2" class="p-0 gap-0">
+        <ng-template
+          #content
+          let-activateCallback="activateCallback"
+          let-value="value"
+          let-active="active"
+        >
+          <button
+            class="step-diamond-btn"
+            (click)="activateCallback()"
+            type="button"
+            [class.passed]="value < currentStep()"
+            [class.active]="active"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="14.8491"
+                width="21"
+                height="21"
+                transform="rotate(45 14.8491 0)"
+                [attr.fill]="active ? 'var(--color-blue-100)' : 'transparent'"
+              />
+              <rect
+                x="14.8491"
+                y="7.42871"
+                width="10"
+                height="10"
+                transform="rotate(45 14.8491 7.42871)"
+                [attr.fill]="value > currentStep() ? 'transparent' : 'var(--color-primary)'"
+                [attr.stroke]="'var(--color-primary)'"
+              />
+            </svg>
+          </button>
+        </ng-template>
+      </p-step>
+
+      <p-step [value]="3" class="p-0 gap-0">
+        <ng-template
+          #content
+          let-activateCallback="activateCallback"
+          let-value="value"
+          let-active="active"
+        >
+          <button
+            class="step-diamond-btn"
+            (click)="activateCallback()"
+            type="button"
+            [class.passed]="value < currentStep()"
+            [class.active]="active"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="14.8491"
+                width="21"
+                height="21"
+                transform="rotate(45 14.8491 0)"
+                [attr.fill]="active ? 'var(--color-blue-100)' : 'transparent'"
+              />
+              <rect
+                x="14.8491"
+                y="7.42871"
+                width="10"
+                height="10"
+                transform="rotate(45 14.8491 7.42871)"
+                [attr.fill]="value > currentStep() ? 'transparent' : 'var(--color-primary)'"
+                [attr.stroke]="'var(--color-primary)'"
+              />
+            </svg>
+          </button>
+        </ng-template>
+      </p-step>
+
+      <p-step [value]="4" class="p-0 gap-0">
+        <ng-template
+          #content
+          let-activateCallback="activateCallback"
+          let-value="value"
+          let-active="active"
+        >
+          <button
+            class="step-diamond-btn"
+            (click)="activateCallback()"
+            type="button"
+            [class.passed]="value < currentStep()"
+            [class.active]="active"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="14.8491"
+                width="21"
+                height="21"
+                transform="rotate(45 14.8491 0)"
+                [attr.fill]="active ? 'var(--color-blue-100)' : 'transparent'"
+              />
+              <rect
+                x="14.8491"
+                y="7.42871"
+                width="10"
+                height="10"
+                transform="rotate(45 14.8491 7.42871)"
+                [attr.fill]="value > currentStep() ? 'transparent' : 'var(--color-primary)'"
+                [attr.stroke]="'var(--color-primary)'"
+              />
+            </svg>
+          </button>
+        </ng-template>
+      </p-step>
+    </p-step-list>
+
+    <p-step-panels>
+      <!-- step 1: Email -->
+      <p-step-panel [value]="1">
+        <ng-template #content let-activateCallback="activateCallback">
+          <app-register-email (next)="currentStep.set(2)" />
+        </ng-template>
+      </p-step-panel>
+
+      <!-- step 2: OTP -->
+      <p-step-panel [value]="2">
+        <ng-template #content let-activateCallback="activateCallback">
+          <app-register-otp (previous)="currentStep.set(1)" (next)="currentStep.set(3)" />
+        </ng-template>
+      </p-step-panel>
+
+      <!-- step 3: personal info -->
+      <p-step-panel [value]="3">
+        <ng-template #content let-activateCallback="activateCallback">
+          <app-register-info (next)="currentStep.set(4)" />
+        </ng-template>
+      </p-step-panel>
+
+      <!-- step 4: password -->
+      <p-step-panel [value]="4">
+        <ng-template #content let-activateCallback="activateCallback">
+          <app-register-password />
+        </ng-template>
+      </p-step-panel>
+    </p-step-panels>
+  </p-stepper>
+</div>

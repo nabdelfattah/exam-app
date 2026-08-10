@@ -1,0 +1,26 @@
+<div class="lg:w-113 min-w-80 p-5">
+  <button
+    class="flex items-center justify-center p-2 border border-gray-200 hover:border-gray-400 transition duration-300 cursor-pointer mb-10"
+    (click)="navigateHandler()"
+  >
+    <img src="/assets/icons/move-left.svg" alt="arrow icon" />
+  </button>
+  <h1 class="h1 mb-4">Password Reset Sent</h1>
+  <div class="flex flex-col gap-4">
+    <p class="description text-black">
+      We have sent a password reset link to: <span class="text-primary">{{ email() }}</span
+      >.
+    </p>
+    <p class="description text-black">
+      Please check your inbox and follow the instructions to reset your password.
+    </p>
+    <p class="description">
+      If you don’t see the email within a few minutes, check your spam or junk folder.
+    </p>
+  </div>
+  <div class="mt-16">
+    <p class="font-geist font-medium text-sm text-gray-500">
+      Don’t have an account? <app-link link="/register">Create yours</app-link>
+    </p>
+  </div>
+</div>

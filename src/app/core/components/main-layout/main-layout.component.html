@@ -1,0 +1,15 @@
+<p-drawer #drawerRef class="absolute" [(visible)]="visible">
+  <ng-template #headless> <app-sidebar [(isVisible)]="visible" /></ng-template>
+</p-drawer>
+<p-button
+  (click)="visible.set(true)"
+  icon="pi pi-bars"
+  class="absolute top-1.5 right-1.5 lg:hidden"
+/>
+
+<div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] h-dvh">
+  <app-sidebar class="hidden lg:block h-full overflow-y-auto" [(isVisible)]="visible" />
+  <main class="min-h-0 h-full overflow-y-auto mt-10 lg:mt-0">
+    <router-outlet />
+  </main>
+</div>
