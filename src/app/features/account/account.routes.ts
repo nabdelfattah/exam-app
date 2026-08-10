@@ -2,8 +2,22 @@ import { Routes } from '@angular/router';
 
 export const accountRoutes: Routes = [
   {
-    path: 'settings',
-    loadComponent: () => import('./settings/settings.component').then((c) => c.SettingsComponent),
-    title: 'Settings',
+    path: '',
+    redirectTo: 'profile',
+    pathMatch: 'full',
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./presentation/pages/profile/profile.component').then((c) => c.ProfileComponent),
+    title: 'Profile',
+  },
+  {
+    path: 'change-password',
+    loadComponent: () =>
+      import('./presentation/pages/change-password/change-password.component').then(
+        (c) => c.ChangePasswordComponent,
+      ),
+    title: 'Change Password',
   },
 ];
