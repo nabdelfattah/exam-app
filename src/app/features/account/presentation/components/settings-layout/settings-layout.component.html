@@ -15,7 +15,7 @@
     <div class="flex flex-col gap-2.5">
       <a
         routerLink="/account/profile"
-        class="flex items-center gap-2.5 text-base font-geist font-normal px-4 py-2.5"
+        class="flex items-center gap-2.5 text-base text-gray-500 font-geist font-normal px-4 py-2.5 hover:text-primary transition duration-300"
         routerLinkActive="text-primary bg-blue-50 "
       >
         <svg
@@ -37,7 +37,7 @@
       </a>
       <a
         routerLink="/account/change-password"
-        class="flex items-center gap-2.5 text-base font-geist font-normal px-4 py-2.5"
+        class="flex items-center gap-2.5 text-base text-gray-500 font-geist font-normal px-4 py-2.5 hover:text-primary transition duration-300"
         routerLinkActive="text-primary bg-blue-50 "
       >
         <svg
@@ -49,7 +49,7 @@
         >
           <path
             d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V13C3 11.8954 3.89543 11 5 11Z"
-            stroke="#6B7280"
+            stroke="currentColor"
             stroke-width="1.25"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -59,7 +59,7 @@
       >
     </div>
 
-    <app-button (click)="logout()" variant="danger" type="button" class="">
+    <app-button (click)="logout()" variant="danger" type="button" label="Logout" size="sm">
       <svg
         width="18"
         height="18"
@@ -75,14 +75,10 @@
           stroke-linejoin="round"
         />
       </svg>
-      Logout
     </app-button>
   </nav>
 
   <div class="bg-white p-6 h-full">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla esse vitae earum cum.
-    Dolorum fugiat, praesentium ad commodi impedit in eius laboriosam laborum, repudiandae aliquam,
-    aspernatur obcaecati quas libero.
     <router-outlet />
   </div>
 </div>

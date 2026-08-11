@@ -1,1 +1,62 @@
-<div></div>
+<form [formGroup]="profileForm" (ngSubmit)="submitHandler()">
+  <div class="flex flex-col gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+      <app-field
+        controlName="firstName"
+        label="First name*"
+        placeholder="Ahmed"
+        type="text"
+        [errorMessages]="{
+          required: 'First name is required',
+        }"
+      />
+      <app-field
+        controlName="lastName"
+        label="Last name*"
+        placeholder="Abdullah"
+        type="text"
+        [errorMessages]="{
+          required: 'Last name is required',
+        }"
+      />
+    </div>
+    <app-field
+      controlName="username"
+      label="Username*"
+      placeholder="user123"
+      type="text"
+      [errorMessages]="{
+        required: 'Username is required',
+        minlength: 'Minimum length is 3 characters',
+      }"
+    />
+    <div
+      class="flex flex-col"
+      [class.phone-invalid]="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched"
+    >
+      <label class="font-geist text-base font-medium">Phone</label>
+      <intl-tel-input
+        formControlName="phone"
+        initialCountry="eg"
+        [separateDialCode]="true"
+        containerClass="border border-gray-200 rounded-none w-full"
+        [inputAttributes]="{ class: 'py-3.5 px-2.5 w-full' }"
+        (numberChange)="onPhoneChange($event)"
+      />
+      @if (profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched) {
+        <app-input-message>Please enter a valid phone number</app-input-message>
+      }
+    </div>
+  </div>
+
+  <!-- buttons -->
+  <div class="flex gap-3.5 my-8">
+    <app-button
+      label="Delete My Account"
+      type="button"
+      variant="danger"
+      class="h-full"
+    ></app-button>
+    <app-button label="Save Changes" type="submit" variant="primary"></app-button>
+  </div>
+</form>

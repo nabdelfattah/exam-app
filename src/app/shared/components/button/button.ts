@@ -5,11 +5,15 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-button',
   imports: [ButtonModule],
   templateUrl: './button.html',
+  host: {
+    class: 'w-full',
+  },
 })
 export class Button {
   label = input<string>('');
   type = input<'submit' | 'button'>('button');
   variant = input<'primary' | 'secondary' | 'outline' | 'link' | 'danger'>('primary');
+  size = input<'sm' | 'md'>('md');
 
   buttonClass = computed(() => {
     const base =
@@ -21,7 +25,7 @@ export class Button {
     } else if (this.variant() == 'link') {
       return `font-geist font-medium text-sm text-primary hover:underline transition duration-300 p-0 bg-transparent border-none`;
     } else if (this.variant() == 'danger') {
-      return `font-geist font-medium text-sm bg-red-50 text-red-600 border border-transparent rounded-none w-full hover:border hover:border-red-600`;
+      return `py-3.5 font-geist font-medium text-sm bg-red-50 text-red-600 border border-red-50 hover:border-current rounded-none w-full h-full hover:border`;
     } else {
       return `${base}`;
     }
