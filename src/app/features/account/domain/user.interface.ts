@@ -42,14 +42,24 @@ export interface UpdateUserPayload {
 }
 
 export interface OtpPayload {
-  code?: string;
+  code: string;
 }
 
 export interface VerifyEmailPayload {
-  newEmail?: string;
+  newEmail: string;
 }
 
 export interface VerifyEmailRes {
   message: string;
   code: string;
+}
+
+export interface ChangePasswordPayload {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface changePasswordRes {
+  message: string;
 }

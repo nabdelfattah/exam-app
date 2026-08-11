@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  ChangePasswordPayload,
+  changePasswordRes,
   OtpPayload,
   UpdateUserPayload,
   User,
@@ -38,5 +40,12 @@ export class AccountService {
 
   confirmEmail(payload: OtpPayload): Observable<UserRes> {
     return this.httpClient.post<UserRes>(`${environment.baseUrl}users/email/confirm`, payload);
+  }
+
+  changePassword(payload: ChangePasswordPayload): Observable<changePasswordRes> {
+    return this.httpClient.post<changePasswordRes>(
+      `${environment.baseUrl}users/change-password`,
+      payload,
+    );
   }
 }

@@ -30,7 +30,7 @@ export class OtpFormComponent {
   submitHandler() {
     if (this.otpForm.valid) {
       // send OTP to the backend (cofirm email)
-      this.accountService.confirmEmail(this.otpForm.value).subscribe({
+      this.accountService.confirmEmail(this.otpForm.getRawValue()).subscribe({
         next: (res) => {
           console.log(res);
           this.messageService.add({

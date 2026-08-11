@@ -25,7 +25,7 @@ export class EmailFormComponent {
   submitHandler() {
     if (this.emailForm.valid) {
       // verify emeil
-      this.accountService.verifyEmail(this.emailForm.value).subscribe({
+      this.accountService.verifyEmail(this.emailForm.getRawValue()).subscribe({
         next: (res) => {
           // display toast
           this.messageService.add({
