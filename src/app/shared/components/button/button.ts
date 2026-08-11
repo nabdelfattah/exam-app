@@ -1,4 +1,3 @@
-import { computeMsgId } from '@angular/compiler';
 import { Component, computed, input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
@@ -10,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 export class Button {
   label = input<string>('');
   type = input<'submit' | 'button'>('button');
-  variant = input<'primary' | 'secondary' | 'outline' | 'link'>('primary');
+  variant = input<'primary' | 'secondary' | 'outline' | 'link' | 'danger'>('primary');
 
   buttonClass = computed(() => {
     const base =
@@ -21,6 +20,8 @@ export class Button {
       return `${base} bg-blue-50 border border-primary text-black hover:bg-blue-100`;
     } else if (this.variant() == 'link') {
       return `font-geist font-medium text-sm text-primary hover:underline transition duration-300 p-0 bg-transparent border-none`;
+    } else if (this.variant() == 'danger') {
+      return `font-geist font-medium text-sm bg-red-50 text-red-600 border border-transparent rounded-none w-full hover:border hover:border-red-600`;
     } else {
       return `${base}`;
     }
