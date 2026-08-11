@@ -1,11 +1,12 @@
-import { Component, ViewChild, inject, input, model } from '@angular/core';
-import { RouterLinkWithHref, RouterLinkActive, Router } from '@angular/router';
+import { Component, ViewChild, inject, model } from '@angular/core';
+import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
 import { Popover } from 'primeng/popover';
 import { PopoverModule } from 'primeng/popover';
+import { AuthFlowService } from '@/app/features/auth/services/auth-flow-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +25,7 @@ import { PopoverModule } from 'primeng/popover';
   },
 })
 export class SidebarComponent {
-  private readonly router = inject(Router);
+  private readonly authFlowService = inject(AuthFlowService);
   user = JSON.parse(localStorage.getItem('examUser') || '');
   isVisible = model();
 
@@ -40,8 +41,6 @@ export class SidebarComponent {
   }
 
   logout() {
-    localStorage.removeItem('examToken');
-    localStorage.removeItem('examUser');
-    this.router.navigate(['/login']);
+    this.authFlowService.logout();
   }
 }

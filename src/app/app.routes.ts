@@ -3,6 +3,7 @@ import { AuthLayout, Notfound } from '@core/components';
 import { MainLayoutComponent } from './core/components/main-layout/main-layout.component';
 import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
+import { SettingsLayoutComponent } from './features/account/presentation/components/settings-layout/settings-layout.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
       },
       {
         path: 'account',
+        component: SettingsLayoutComponent,
         loadChildren: () =>
           import('./features/account/account.routes').then((c) => c.accountRoutes),
       },

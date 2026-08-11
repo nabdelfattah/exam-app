@@ -1,12 +1,7 @@
 <header>
   <app-breadcrumb [items]="items" />
   <div class="grid grid-cols-[auto_1fr] items-center justify-center gap-2.5 p-6">
-    <button
-      (click)="goBack()"
-      class="flex items-center border transition duration-150 cursor-pointer border-primary hover:border-black px-2 h-full"
-    >
-      <img src="/assets/icons/chevron-left.svg" alt="left chevron icon" />
-    </button>
+    <app-back-button />
 
     <app-title
       ><img src="/assets/icons/book-open-check-white.svg" alt="granduation cap icon" />{{

@@ -1,3 +1,8 @@
-<button pButton [label]="label()" [type]="type()" [class]="buttonClass()">
+<button
+  pButton
+  [label]="label()"
+  [type]="type()"
+  [class]="size() == 'sm' ? `${buttonClass()} py-2.5! px-4!` : buttonClass()"
+>
   <ng-content />
 </button>
