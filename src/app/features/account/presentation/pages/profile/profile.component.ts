@@ -58,9 +58,6 @@ export class ProfileComponent {
 
   submitHandler() {
     if (this.profileForm.valid) {
-      // send data to backend
-      console.log(this.profileForm.value);
-
       // convert the phone number to the correct format if it was an Egyption number. else leave it as is
       const phone = this.profileForm.getRawValue().phone.startsWith('+20')
         ? '0' + this.profileForm.getRawValue().phone.slice(3)
@@ -71,8 +68,6 @@ export class ProfileComponent {
 
       this.accountService.updateUser(payload).subscribe({
         next: (res: User) => {
-          console.log({ res });
-
           //  get Updated data
           this.getUserDataAndFillTheForm();
         },

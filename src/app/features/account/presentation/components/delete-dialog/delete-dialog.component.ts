@@ -23,7 +23,6 @@ export class DeleteDialogComponent {
     this.accountService.deleteAccount().subscribe({
       next: (res) => {
         this.router.navigate(['/login']);
-        console.log(res);
       },
       error: () => {
         // handled globally via error interceptor

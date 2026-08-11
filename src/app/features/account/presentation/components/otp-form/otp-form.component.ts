@@ -32,7 +32,6 @@ export class OtpFormComponent {
       // send OTP to the backend (cofirm email)
       this.accountService.confirmEmail(this.otpForm.getRawValue()).subscribe({
         next: (res) => {
-          console.log(res);
           this.messageService.add({
             severity: 'success',
             detail: 'Email changed successfully.',
