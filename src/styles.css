@@ -125,3 +125,13 @@ body {
 .p-breadcrumb-item-label {
   @apply text-xs md:text-sm font-geist text-gray-400 hover:text-gray-500 transition-all duration-150;
 }
+
+.email-dialog .p-dialog-header {
+  display: none;
+}
+.email-dialog .p-dialog-content {
+  padding: 0;
+}
+.email-dialog .p-steppanels {
+  padding: 0;
+}

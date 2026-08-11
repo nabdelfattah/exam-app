@@ -16,6 +16,7 @@ export interface User {
 export interface UserRes {
   code: number;
   status: boolean;
+  message?: string;
   payload: {
     user: {
       id: string;
@@ -38,4 +39,17 @@ export interface UpdateUserPayload {
   firstName?: string;
   lastName?: string;
   phone?: string;
+}
+
+export interface OtpPayload {
+  code?: string;
+}
+
+export interface VerifyEmailPayload {
+  newEmail?: string;
+}
+
+export interface VerifyEmailRes {
+  message: string;
+  code: string;
 }

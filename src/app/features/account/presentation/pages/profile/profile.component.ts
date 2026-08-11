@@ -1,18 +1,29 @@
 import IntlTelInputWithUtils from '@intl-tel-input/angular/with-utils';
 import { Field, InputMessage, Button } from '@/app/shared/components';
-import { Component, inject } from '@angular/core';
+import { Component, inject, model, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AccountService } from '../../../infrastructure/account.service';
 import { User } from '../../../domain/user.interface';
+import { EmailDialogComponent } from '../../components/email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [Button, Field, ReactiveFormsModule, IntlTelInputWithUtils, InputMessage],
+  imports: [
+    Button,
+    Field,
+    ReactiveFormsModule,
+    IntlTelInputWithUtils,
+    InputMessage,
+    EmailDialogComponent,
+  ],
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent {
   private fb = inject(FormBuilder);
   private readonly accountService = inject(AccountService);
+
+  email = signal<string>('');
+  emailDialogVisible = model<boolean>(false);
 
   profileForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -28,6 +39,7 @@ export class ProfileComponent {
   getUserDataAndFillTheForm() {
     this.accountService.getUser().subscribe({
       next: (res: User) => {
+        this.email.set(res.email);
         this.profileForm.patchValue({
           firstName: res.firstName,
           lastName: res.lastName,
@@ -70,5 +82,11 @@ export class ProfileComponent {
       this.profileForm.markAllAsTouched();
     }
   }
+
+  changeEmailHandler() {
+    console.log('button clicked');
+    this.emailDialogVisible.set(true);
+  }
+
   onPhoneChange(_value: string): void {}
 }
