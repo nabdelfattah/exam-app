@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AccountService } from '../../../infrastructure/account.service';
 import { User } from '../../../domain/user.interface';
 import { EmailDialogComponent } from '../../components/email-dialog/email-dialog.component';
+import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,7 @@ import { EmailDialogComponent } from '../../components/email-dialog/email-dialog
     IntlTelInputWithUtils,
     InputMessage,
     EmailDialogComponent,
+    DeleteDialogComponent,
   ],
   templateUrl: './profile.component.html',
 })
@@ -24,6 +26,7 @@ export class ProfileComponent {
 
   email = signal<string>('');
   emailDialogVisible = model<boolean>(false);
+  deleteDialogVisible = model<boolean>(false);
 
   profileForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -84,8 +87,11 @@ export class ProfileComponent {
   }
 
   changeEmailHandler() {
-    console.log('button clicked');
     this.emailDialogVisible.set(true);
+  }
+
+  deleteAccountHandler() {
+    this.deleteDialogVisible.set(true);
   }
 
   onPhoneChange(_value: string): void {}

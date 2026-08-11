@@ -78,7 +78,9 @@
       label="Delete My Account"
       type="button"
       variant="danger"
+      (click)="deleteAccountHandler()"
     ></app-button>
     <app-button class="w-full" label="Save Changes" type="submit" variant="primary"></app-button>
   </div>
+  <app-delete-dialog [(visible)]="deleteDialogVisible" />
 </form>

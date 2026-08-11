@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import {
   ChangePasswordPayload,
   changePasswordRes,
+  DeleteAccountRes,
   OtpPayload,
   UpdateUserPayload,
   User,
@@ -47,5 +48,9 @@ export class AccountService {
       `${environment.baseUrl}users/change-password`,
       payload,
     );
+  }
+
+  deleteAccount(): Observable<DeleteAccountRes> {
+    return this.httpClient.delete<DeleteAccountRes>(`${environment.baseUrl}users/account`);
   }
 }

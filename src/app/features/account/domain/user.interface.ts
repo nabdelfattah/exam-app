@@ -63,3 +63,7 @@ export interface ChangePasswordPayload {
 export interface changePasswordRes {
   message: string;
 }
+
+export interface DeleteAccountRes {
+  message: string;
+}
