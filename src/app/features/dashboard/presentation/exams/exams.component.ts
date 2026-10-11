@@ -5,16 +5,21 @@ import { Exam } from '@app/features/dashboard/domain/exam.interface';
 import { ExamsService } from '@app/features/dashboard/infrastructure/exams.service';
 import { ExamCardComponent } from '../exam-card/exam-card.component';
 import { EmptyStateComponent } from '@/app/shared/components/empty-state/empty-state.component';
-import { Location } from '@angular/common';
+import { BackButtonComponent } from '@/app/shared/components/back-button/back-button.component';
 
 @Component({
   selector: 'app-exams',
-  imports: [BreadcrumbRouterDemo, TitleComponent, ExamCardComponent, EmptyStateComponent],
+  imports: [
+    BreadcrumbRouterDemo,
+    TitleComponent,
+    ExamCardComponent,
+    EmptyStateComponent,
+    BackButtonComponent,
+  ],
   templateUrl: './exams.component.html',
 })
 export class ExamsComponent {
   private readonly examService = inject(ExamsService);
-  private location = inject(Location);
 
   id = input<string>(''); // auto-populated from :id
   examsList = signal<Exam[]>([]);
@@ -28,9 +33,5 @@ export class ExamsComponent {
       },
       error: () => {},
     });
-  }
-
-  goBack() {
-    this.location.back();
   }
 }

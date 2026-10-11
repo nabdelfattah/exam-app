@@ -1,6 +1,11 @@
 {
   "name": "ngx-iam-auth",
   "version": "0.0.1",
+  "scripts": {
+    "test": "ng test ngx-iam-auth",
+    "test:ci": "ng test ngx-iam-auth --watch=false",
+    "test:coverage": "ng test ngx-iam-auth --watch=false --coverage"
+  },
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0"

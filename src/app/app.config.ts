@@ -10,6 +10,8 @@ import { MessageService } from 'primeng/api';
 import { errorInterceptor } from '@core/interceptors/error-interceptor';
 import { MyPreset } from './core/theme/my-preset';
 import { headerInterceptor } from './core/interceptors/header-interceptor';
+import { environment } from '@/environments/environment';
+import { provideIamAuth } from 'ngx-iam-auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withInterceptors([errorInterceptor, headerInterceptor])),
+    provideIamAuth({ baseUrl: environment.baseUrl }),
     MessageService,
     // provideAnimations(),
   ],

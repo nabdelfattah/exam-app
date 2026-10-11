@@ -1,0 +1,37 @@
+<div>
+  <h1 class="h1 mt-2.5 mb-7.5">Change Email</h1>
+  <p class="blue-heading">Verify OTP</p>
+  <p class="description">
+    Please enter the 6-digits code we have sent to: <span class="text-black">{{ email() }}</span
+    >.
+    <app-button label="Edit" variant="link" type="button" (click)="editHandler()"></app-button>
+  </p>
+  <form [formGroup]="otpForm" (ngSubmit)="submitHandler()">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col items-center">
+        <p-inputOtp
+          formControlName="code"
+          name="otp"
+          [length]="6"
+          styleClass="w-10 h-10 rounded-none mt-6.5 mb-2 mx-2 border border-gray-200"
+        />
+
+        @if (this.otpForm.get('code')?.invalid && this.otpForm.get('code')?.touched) {
+          @if (this.otpForm.get('code')?.hasError('pattern')) {
+            <app-input-message>Invalid OTP</app-input-message>
+          }
+          @if (this.otpForm.get('code')?.hasError('required')) {
+            <app-input-message>OTP is required</app-input-message>
+          }
+        }
+      </div>
+    </div>
+
+    <p class="description mt-6 mb-20 text-center">You can request another code in: 60s</p>
+
+    <!-- next button -->
+    <div class="mt-10">
+      <app-button label="Verify Code" type="submit" variant="primary"></app-button>
+    </div>
+  </form>
+</div>

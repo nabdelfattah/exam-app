@@ -1,6 +1,6 @@
 import { Component, inject, output, signal } from '@angular/core';
 import { Button, Toast, Field, InputMessage } from '@/app/shared/components';
-import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import IntlTelInputWithUtils from '@intl-tel-input/angular/with-utils';
 import { RegisterFlowService } from '../../services/register-flow-service';
 @Component({

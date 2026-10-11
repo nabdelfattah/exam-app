@@ -5,5 +5,7 @@ export interface ResetPasswordReq {
 }
 
 export interface ResetPasswordRes {
+  status: boolean;
+  code: number;
   message: string;
 }

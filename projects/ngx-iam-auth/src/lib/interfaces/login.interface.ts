@@ -8,7 +8,8 @@ export interface LoginRes {
   phone: string;
   firstName: string;
   lastName: string;
-  profilePhoto: string;
+  gender?: string;
+  profilePhoto?: string;
   role: string;
   token: string;
 }
@@ -23,12 +24,11 @@ export interface LoginRowRes {
       phone: string;
       firstName: string;
       lastName: string;
-      profilePhoto: string;
+      gender?: string;
+      profilePhoto?: string;
       emailVerified: boolean;
       phoneVerified: boolean;
       role: string;
-      createdAt: string;
-      updatedAt: string;
     };
     token: string;
   };

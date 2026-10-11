@@ -1,0 +1,122 @@
+<p-dialog
+  [modal]="true"
+  [dismissableMask]="true"
+  [(visible)]="visible"
+  [style]="{ width: '36rem' }"
+  styleClass="rounded-none email-dialog p-8"
+>
+  <button
+    class="absolute top-1.5 right-1.5 p-2 cursor-pointer"
+    aria-label="close dialog"
+    (click)="visible.set(false)"
+  >
+    <img src="/assets/icons/close.svg" alt="close icon" />
+  </button>
+  <p-stepper [(value)]="currentStep" class="register-stepper">
+    <p-step-list>
+      <p-step [value]="1" class="p-0 gap-0">
+        <ng-template
+          #content
+          let-activateCallback="activateCallback"
+          let-value="value"
+          let-active="active"
+        >
+          <button
+            class="step-diamond-btn"
+            (click)="activateCallback()"
+            type="button"
+            [class.passed]="value < currentStep()"
+            [class.active]="active"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="14.8491"
+                width="21"
+                height="21"
+                transform="rotate(45 14.8491 0)"
+                [attr.fill]="active ? 'var(--color-blue-100)' : 'transparent'"
+              />
+              <rect
+                x="14.8491"
+                y="7.42871"
+                width="10"
+                height="10"
+                transform="rotate(45 14.8491 7.42871)"
+                [attr.fill]="value > currentStep() ? 'transparent' : 'var(--color-primary)'"
+                [attr.stroke]="'var(--color-primary)'"
+              />
+            </svg>
+          </button>
+        </ng-template>
+      </p-step>
+
+      <p-step [value]="2" class="p-0 gap-0">
+        <ng-template
+          #content
+          let-activateCallback="activateCallback"
+          let-value="value"
+          let-active="active"
+        >
+          <button
+            class="step-diamond-btn"
+            (click)="activateCallback()"
+            type="button"
+            [class.passed]="value < currentStep()"
+            [class.active]="active"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="14.8491"
+                width="21"
+                height="21"
+                transform="rotate(45 14.8491 0)"
+                [attr.fill]="active ? 'var(--color-blue-100)' : 'transparent'"
+              />
+              <rect
+                x="14.8491"
+                y="7.42871"
+                width="10"
+                height="10"
+                transform="rotate(45 14.8491 7.42871)"
+                [attr.fill]="value > currentStep() ? 'transparent' : 'var(--color-primary)'"
+                [attr.stroke]="'var(--color-primary)'"
+              />
+            </svg>
+          </button>
+        </ng-template>
+      </p-step>
+    </p-step-list>
+
+    <p-step-panels>
+      <!-- step 1: Email -->
+      <p-step-panel [value]="1">
+        <ng-template #content let-activateCallback="activateCallback">
+          <app-email-form (next)="currentStep.set(2)" />
+        </ng-template>
+      </p-step-panel>
+
+      <!-- step 2: OTP -->
+      <p-step-panel [value]="2">
+        <ng-template #content let-activateCallback="activateCallback">
+          <app-otp-form
+            (previous)="currentStep.set(1)"
+            [(visible)]="visible"
+            (refetch)="refetch.emit()"
+          />
+        </ng-template>
+      </p-step-panel>
+    </p-step-panels>
+  </p-stepper>
+</p-dialog>

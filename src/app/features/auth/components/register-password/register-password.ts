@@ -43,7 +43,7 @@ export class RegisterPassword {
           // show success toast
           this.messageService.add({
             severity: 'success',
-            detail: 'You created an accout successfully!',
+            detail: 'You created an account successfully!',
           });
           // redirect to the dashboard
           this.router.navigate(['/diplomas']);

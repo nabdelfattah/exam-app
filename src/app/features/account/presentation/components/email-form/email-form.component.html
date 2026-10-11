@@ -1,0 +1,26 @@
+<div>
+  <h1 class="h1 mt-2.5 mb-7.5">Change Email</h1>
+  <p class="blue-heading">Enter your new email</p>
+
+  <form [formGroup]="emailForm" (ngSubmit)="submitHandler()">
+    <div class="flex flex-col gap-4">
+      <app-field
+        controlName="newEmail"
+        label="Email"
+        placeholder="user@example.com"
+        type="email"
+        [errorMessages]="{
+          required: 'Your Email is required',
+          email: 'Please, enter a valid email',
+        }"
+      />
+    </div>
+
+    <!-- next button -->
+    <div class="mt-10">
+      <app-button label="Next" type="submit" variant="primary"
+        ><img src="/assets/icons/chevron-right-light.svg" alt="arrow icon" class="order-last w-4"
+      /></app-button>
+    </div>
+  </form>
+</div>

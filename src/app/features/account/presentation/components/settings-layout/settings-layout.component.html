@@ -1,1 +1,84 @@
-<p>settings-layout works!</p>
+<header>
+  <app-breadcrumb [items]="items" />
+  <div class="grid grid-cols-[auto_1fr] items-center justify-center gap-2.5 m-6">
+    <app-back-button />
+
+    <app-title
+      ><img src="/assets/icons/user-white.svg" alt="granduation cap icon" />Account
+      Settings</app-title
+    >
+  </div>
+</header>
+
+<div class="m-6 grid md:grid-cols-[282fr_724fr] gap-6 h-full">
+  <nav class="bg-white p-6 h-full flex flex-col justify-between">
+    <div class="flex flex-col gap-2.5">
+      <a
+        routerLink="/account/profile"
+        class="flex items-center gap-2.5 text-base text-gray-500 font-geist font-normal px-4 py-2.5 hover:text-primary transition duration-300"
+        routerLinkActive="text-primary bg-blue-50 "
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M18 20C18 18.4087 17.3679 16.8826 16.2426 15.7574C15.1174 14.6321 13.5913 14 12 14M12 14C10.4087 14 8.88258 14.6321 7.75736 15.7574C6.63214 16.8826 6 18.4087 6 20M12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14ZM22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Profile
+      </a>
+      <a
+        routerLink="/account/change-password"
+        class="flex items-center gap-2.5 text-base text-gray-500 font-geist font-normal px-4 py-2.5 hover:text-primary transition duration-300"
+        routerLinkActive="text-primary bg-blue-50 "
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V13C3 11.8954 3.89543 11 5 11Z"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Change Password</a
+      >
+    </div>
+
+    <app-button (click)="logout()" variant="danger" type="button" label="Logout" size="sm">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 5.25L2.25 9L6 12.75M2.25 9H11.25M11.25 15.75H14.25C14.6478 15.75 15.0294 15.592 15.3107 15.3107C15.592 15.0294 15.75 14.6478 15.75 14.25V3.75C15.75 3.35218 15.592 2.97064 15.3107 2.68934C15.0294 2.40804 14.6478 2.25 14.25 2.25H11.25"
+          stroke="currentColor"
+          stroke-width="1.25"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </app-button>
+  </nav>
+
+  <div class="bg-white p-6 h-full">
+    <router-outlet />
+  </div>
+</div>

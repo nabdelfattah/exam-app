@@ -109,15 +109,12 @@ export class QuestionsComponent {
 
   goNext() {
     if (this.answerId()) {
-      console.log('answerId =', this.answerId());
       // append {questionId: answerId} to the answers list and update localstorage
       const questionId = this.questionsList()[this.currentIndex()].id;
       const answerId = this.answerId();
       this.selectAnswer(questionId, answerId);
       // navigate to the next question or display result if exam ends
       if (this.currentIndex() + 1 == this.questionsList().length) {
-        console.log('submit exam...');
-
         // submit the exam
         this.examService
           .submitExam({
@@ -127,14 +124,11 @@ export class QuestionsComponent {
           })
           .subscribe({
             next: (res) => {
-              console.log({ res });
               this.resultData.set(res);
 
               this.isSubmitted.set(true);
             },
-            error: (err) => {
-              console.log(err);
-            },
+            error: () => {},
           });
       } else {
         this.currentIndex.update((prev) => prev + 1);
