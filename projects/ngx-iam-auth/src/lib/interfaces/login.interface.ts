@@ -29,8 +29,6 @@ export interface LoginRowRes {
       emailVerified: boolean;
       phoneVerified: boolean;
       role: string;
-      createdAt: string;
-      updatedAt: string;
     };
     token: string;
   };

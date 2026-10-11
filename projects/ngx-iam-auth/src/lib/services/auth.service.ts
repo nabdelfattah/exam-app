@@ -5,9 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import AuthEndPoints from '../enum/auth-end-points';
 import { AuthAdaptorService } from '../adaptor/auth-adaptor.service';
 import { map } from 'rxjs';
-import { LoginReq, LoginRes } from '../interfaces/login.interface';
+import { LoginReq, LoginRes, LoginRowRes } from '../interfaces/login.interface';
 import { VerifyEmailReq, VerifyEmailRes } from '../interfaces/verify-email.interface';
-import { RegisterReq, RegisterRes } from '../interfaces/register.interface';
+import { RegisterReq, RegisterRes, RegisterRowRes } from '../interfaces/register.interface';
 import { ConfirmEmailReq, ConfirmEmailRes } from '../interfaces/confirm-email.interface';
 import { ForgetPasswordReq, ForgetPasswordRes } from '../interfaces/forget-password.interface';
 import { ResetPasswordReq, ResetPasswordRes } from '../interfaces/reset-password.interface';
@@ -29,14 +29,14 @@ export class AuthService implements AuthApi {
 
   register(data: RegisterReq): Observable<RegisterRes> {
     return this.httpClient
-      .post<RegisterRes>(AuthEndPoints.REGISTER, data)
-      .pipe(map((res: any) => this.authAdaptorService.adapt(res)));
+      .post<RegisterRowRes>(AuthEndPoints.REGISTER, data)
+      .pipe(map((res: RegisterRowRes) => this.authAdaptorService.adapt(res)));
   }
 
   login(data: LoginReq): Observable<LoginRes> {
     return this.httpClient
-      .post<LoginRes>(AuthEndPoints.LOGIN, data)
-      .pipe(map((res: any) => this.authAdaptorService.adapt(res)));
+      .post<LoginRowRes>(AuthEndPoints.LOGIN, data)
+      .pipe(map((res: LoginRowRes) => this.authAdaptorService.adapt(res)));
   }
 
   forgetPassword(data: ForgetPasswordReq): Observable<ForgetPasswordRes> {
