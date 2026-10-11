@@ -1,4 +1,3 @@
-import { LoginRowRes } from '../interfaces/login.interface';
 import { AuthAdaptorService } from './auth-adaptor.service';
 
 describe('AuthAdaptorService', () => {
