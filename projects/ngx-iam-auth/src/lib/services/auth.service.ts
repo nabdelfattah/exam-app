@@ -11,6 +11,7 @@ import { RegisterReq, RegisterRes, RegisterRowRes } from '../interfaces/register
 import { ConfirmEmailReq, ConfirmEmailRes } from '../interfaces/confirm-email.interface';
 import { ForgetPasswordReq, ForgetPasswordRes } from '../interfaces/forget-password.interface';
 import { ResetPasswordReq, ResetPasswordRes } from '../interfaces/reset-password.interface';
+import { IAM_AUTH_CONFIG } from '../config/iam-auth.config';
 
 @Injectable({
   providedIn: 'root',
@@ -18,32 +19,45 @@ import { ResetPasswordReq, ResetPasswordRes } from '../interfaces/reset-password
 export class AuthService implements AuthApi {
   private readonly httpClient = inject(HttpClient);
   private readonly authAdaptorService = inject(AuthAdaptorService);
+  private readonly config = inject(IAM_AUTH_CONFIG);
 
   verifyEmail(data: VerifyEmailReq): Observable<VerifyEmailRes> {
-    return this.httpClient.post<VerifyEmailRes>(AuthEndPoints.VERIFY_EMAIL, data);
+    return this.httpClient.post<VerifyEmailRes>(
+      this.config.baseUrl + AuthEndPoints.VERIFY_EMAIL,
+      data,
+    );
   }
 
   confirmEmail(data: ConfirmEmailReq): Observable<ConfirmEmailRes> {
-    return this.httpClient.post<ConfirmEmailRes>(AuthEndPoints.CONFIRM_EMAIL, data);
+    return this.httpClient.post<ConfirmEmailRes>(
+      this.config.baseUrl + AuthEndPoints.CONFIRM_EMAIL,
+      data,
+    );
   }
 
   register(data: RegisterReq): Observable<RegisterRes> {
     return this.httpClient
-      .post<RegisterRowRes>(AuthEndPoints.REGISTER, data)
+      .post<RegisterRowRes>(this.config.baseUrl + AuthEndPoints.REGISTER, data)
       .pipe(map((res: RegisterRowRes) => this.authAdaptorService.adapt(res)));
   }
 
   login(data: LoginReq): Observable<LoginRes> {
     return this.httpClient
-      .post<LoginRowRes>(AuthEndPoints.LOGIN, data)
+      .post<LoginRowRes>(this.config.baseUrl + AuthEndPoints.LOGIN, data)
       .pipe(map((res: LoginRowRes) => this.authAdaptorService.adapt(res)));
   }
 
   forgetPassword(data: ForgetPasswordReq): Observable<ForgetPasswordRes> {
-    return this.httpClient.post<ForgetPasswordRes>(AuthEndPoints.FORGET_PASSWORD, data);
+    return this.httpClient.post<ForgetPasswordRes>(
+      this.config.baseUrl + AuthEndPoints.FORGET_PASSWORD,
+      data,
+    );
   }
 
   resetPassword(data: ResetPasswordReq): Observable<ResetPasswordRes> {
-    return this.httpClient.post<ResetPasswordRes>(AuthEndPoints.RESET_PASSWORD, data);
+    return this.httpClient.post<ResetPasswordRes>(
+      this.config.baseUrl + AuthEndPoints.RESET_PASSWORD,
+      data,
+    );
   }
 }

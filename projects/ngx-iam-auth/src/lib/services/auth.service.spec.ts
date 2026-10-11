@@ -10,8 +10,10 @@ import { RegisterRes } from '../interfaces/register.interface';
 import { ConfirmEmailRes } from '../interfaces/confirm-email.interface';
 import { ResetPasswordRes } from '../interfaces/reset-password.interface';
 import { ForgetPasswordReq, ForgetPasswordRes } from '../interfaces/forget-password.interface';
+import { IAM_AUTH_CONFIG } from '../config/iam-auth.config';
 
 describe('AuthService', () => {
+  const baseUrl = 'https://api.test/';
   let service: AuthService;
   let httpMock: HttpTestingController;
   let adaptor: { adapt: ReturnType<typeof vi.fn> };
@@ -23,6 +25,7 @@ describe('AuthService', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: AuthAdaptorService, useValue: adaptor },
+        { provide: IAM_AUTH_CONFIG, useValue: { baseUrl } },
       ],
     });
     service = TestBed.inject(AuthService);
@@ -42,7 +45,7 @@ describe('AuthService', () => {
     let result: VerifyEmailRes | undefined;
     service.verifyEmail(payload).subscribe((res) => (result = res));
     // assert
-    let call = httpMock.expectOne(AuthEndPoints.VERIFY_EMAIL);
+    let call = httpMock.expectOne(baseUrl + AuthEndPoints.VERIFY_EMAIL);
     expect(call.request.method).toBe('POST');
     expect(call.request.body).toEqual(payload);
     call.flush(mockResponse);
@@ -58,7 +61,7 @@ describe('AuthService', () => {
     let result: ConfirmEmailRes | undefined;
     service.confirmEmail(payload).subscribe((res) => (result = res));
     // assert
-    let call = httpMock.expectOne(AuthEndPoints.CONFIRM_EMAIL);
+    let call = httpMock.expectOne(baseUrl + AuthEndPoints.CONFIRM_EMAIL);
     expect(call.request.method).toBe('POST');
     expect(call.request.body).toEqual(payload);
     call.flush(mockResponse);
@@ -112,7 +115,7 @@ describe('AuthService', () => {
     let result: RegisterRes | undefined;
     service.register(payload).subscribe((res) => (result = res));
     // assert
-    let call = httpMock.expectOne(AuthEndPoints.REGISTER);
+    let call = httpMock.expectOne(baseUrl + AuthEndPoints.REGISTER);
     expect(call.request.method).toBe('POST');
     expect(call.request.body).toEqual(payload);
     call.flush(mockResponse);
@@ -161,7 +164,7 @@ describe('AuthService', () => {
     let result: LoginRes | undefined;
     service.login(payload).subscribe((res) => (result = res));
     // assert
-    const call = httpMock.expectOne(AuthEndPoints.LOGIN);
+    const call = httpMock.expectOne(baseUrl + AuthEndPoints.LOGIN);
     expect(call.request.method).toBe('POST');
     expect(call.request.body).toEqual(payload);
     call.flush(mockResponse);
@@ -178,7 +181,7 @@ describe('AuthService', () => {
     let result: ForgetPasswordRes | undefined;
     service.forgetPassword(payload).subscribe((res) => (result = res));
     // assert
-    let call = httpMock.expectOne(AuthEndPoints.FORGET_PASSWORD);
+    let call = httpMock.expectOne(baseUrl + AuthEndPoints.FORGET_PASSWORD);
     expect(call.request.method).toBe('POST');
     expect(call.request.body).toEqual(payload);
     call.flush(mockResponse);
@@ -198,7 +201,7 @@ describe('AuthService', () => {
     let result: ResetPasswordRes | undefined;
     service.resetPassword(payload).subscribe((res) => (result = res));
     // assert
-    let call = httpMock.expectOne(AuthEndPoints.RESET_PASSWORD);
+    let call = httpMock.expectOne(baseUrl + AuthEndPoints.RESET_PASSWORD);
     expect(call.request.method).toBe('POST');
     expect(call.request.body).toEqual(payload);
     call.flush(mockResponse);
@@ -219,8 +222,9 @@ describe('AuthService', () => {
       .forgetPassword({ email: 'a@b.com' } as ForgetPasswordReq)
       .subscribe({ error: (e) => (error = e) });
     // assert
-    let call = httpMock.expectOne(AuthEndPoints.FORGET_PASSWORD);
-    call.flush(mockError);
-    expect(error?.status).toBeFalsy;
+    let call = httpMock.expectOne(baseUrl + AuthEndPoints.FORGET_PASSWORD);
+    call.flush(mockError, { status: 400, statusText: 'Bad Request' });
+    expect(error?.status).toBe(400);
+    expect(error?.error).toEqual(mockError);
   });
 });
