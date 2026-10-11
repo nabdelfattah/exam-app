@@ -14,9 +14,10 @@ export class AuthAdaptorService implements Adaptor {
       phone: user.phone,
       firstName: user.firstName,
       lastName: user.lastName,
-      profilePhoto: user.profilePhoto,
       role: user.role,
       token,
+      ...(user.profilePhoto && { profilePhoto: user.profilePhoto }),
+      ...(user.gender && { gender: user.gender }),
     };
   }
 }

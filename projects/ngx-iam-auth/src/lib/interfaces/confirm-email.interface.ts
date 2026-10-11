@@ -4,5 +4,7 @@ export interface ConfirmEmailReq {
 }
 
 export interface ConfirmEmailRes {
+  status: boolean;
+  code: number;
   message: string;
 }

@@ -3,6 +3,7 @@ export interface VerifyEmailReq {
 }
 
 export interface VerifyEmailRes {
+  status: boolean;
+  code: number;
   message: string;
-  code: string;
 }

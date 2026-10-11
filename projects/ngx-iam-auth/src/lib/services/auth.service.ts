@@ -19,6 +19,14 @@ export class AuthService implements AuthApi {
   private readonly httpClient = inject(HttpClient);
   private readonly authAdaptorService = inject(AuthAdaptorService);
 
+  verifyEmail(data: VerifyEmailReq): Observable<VerifyEmailRes> {
+    return this.httpClient.post<VerifyEmailRes>(AuthEndPoints.VERIFY_EMAIL, data);
+  }
+
+  confirmEmail(data: ConfirmEmailReq): Observable<ConfirmEmailRes> {
+    return this.httpClient.post<ConfirmEmailRes>(AuthEndPoints.CONFIRM_EMAIL, data);
+  }
+
   register(data: RegisterReq): Observable<RegisterRes> {
     return this.httpClient
       .post<RegisterRes>(AuthEndPoints.REGISTER, data)
@@ -29,14 +37,6 @@ export class AuthService implements AuthApi {
     return this.httpClient
       .post<LoginRes>(AuthEndPoints.LOGIN, data)
       .pipe(map((res: any) => this.authAdaptorService.adapt(res)));
-  }
-
-  verifyEmail(data: VerifyEmailReq): Observable<VerifyEmailRes> {
-    return this.httpClient.post<VerifyEmailRes>(AuthEndPoints.VERIFY_EMAIL, data);
-  }
-
-  confirmEmail(data: ConfirmEmailReq): Observable<ConfirmEmailRes> {
-    return this.httpClient.post<ConfirmEmailRes>(AuthEndPoints.CONFIRM_EMAIL, data);
   }
 
   forgetPassword(data: ForgetPasswordReq): Observable<ForgetPasswordRes> {
