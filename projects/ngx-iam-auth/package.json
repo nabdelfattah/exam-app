@@ -1,14 +1,22 @@
 {
-  "name": "ngx-iam-auth",
-  "version": "0.0.1",
+  "name": "@nabdelfattah/ngx-iam-auth",
+  "version": "0.0.2",
+  "author": "Nada Wael Abdelfattah",
+  "keywords": [
+    "Authentication"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nabdelfattah/exam-app/tree/develop/projects/ngx-iam-auth"
+  },
   "scripts": {
     "test": "ng test ngx-iam-auth",
     "test:ci": "ng test ngx-iam-auth --watch=false",
     "test:coverage": "ng test ngx-iam-auth --watch=false --coverage"
   },
   "peerDependencies": {
-    "@angular/common": "^21.2.0",
-    "@angular/core": "^21.2.0"
+    "@angular/common": "^21.2.0 || ^22.0.0",
+    "@angular/core": "^21.2.0 || ^22.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
